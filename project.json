@@ -1,0 +1,31 @@
+{
+  "overview": "Namwala is a comprehensive bilingual (English/Swahili) agricultural platform for Tanzania, serving farmers, livestock keepers, buyers, specialists, veterinarians, input sellers, service providers, and transport providers. It provides AI-driven tools for disease detection, forecasting, irrigation management, live auctions, marketplace, messaging, payments, and community features.",
+  "features": [
+    "Smart disease outbreak map with Tanzania regional alerts",
+    "Live auction system for crops and livestock",
+    "AI harvest and livestock production forecasting",
+    "Smart irrigation schedule recommendations",
+    "Role-based dashboards for 10 user types",
+    "Bilingual English/Swahili support",
+    "Marketplace with map view and filters",
+    "AI advisor with voice input and spoken responses",
+    "GPS farm boundary mapping",
+    "Community forum with reputation and badges",
+    "Integrated mobile money payments with escrow",
+    "Transport provider search with booking and cost calculator"
+  ],
+  "category": "agriculture",
+  "tags": [
+    "agriculture",
+    "tanzania",
+    "farming",
+    "livestock",
+    "swahili",
+    "marketplace",
+    "ai",
+    "auctions",
+    "disease-tracking",
+    "irrigation"
+  ],
+  "last_updated": "2026-05-14T10:04:07.442Z"
+}

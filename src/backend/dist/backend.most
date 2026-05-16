@@ -1,0 +1,1568 @@
+// Version: 1.0.0
+type AiInsight__957527660 =
+  {
+    category : Text;
+    finding : Text;
+    recommendation : Text;
+    severity : InsightSeverity__604486701
+  };
+type AlertId__60204119 = Nat;
+type AnalysisId__1055697179 = Nat;
+type AnalysisStatus__562966819 = {#complete; #failed; #pending};
+type AnalysisType__366851502 =
+  {#crop_health; #disease_spread; #grazing_conditions; #irrigation_coverage};
+type AnalyticsPeriod__236288905 = {#month; #quarter; #year};
+type AnimalAnalytics__257797594 =
+  {animalType : Text; count : Nat; revenue : Float};
+type AnimalListing__191285102 =
+  {
+    animalType : Text;
+    breed : ?Text;
+    count : Nat;
+    createdAt : Timestamp__301639476;
+    description : Text;
+    id : ListingId__58075594;
+    imageUrl : ?Text;
+    var inquiryCount : Nat;
+    var isAvailable : Bool;
+    keeperId : UserId__158757552;
+    location : Location__847735819;
+    pricePerHead : Float;
+    var updatedAt : Timestamp__301639476
+  };
+type AnimalRecord__838359387 =
+  {
+    animalType : Text;
+    breed : ?Text;
+    count : Nat;
+    createdAt : Timestamp__301639476;
+    var healthStatus : {#deceased; #healthy; #sick; #under_treatment};
+    id : Nat;
+    keeperId : UserId__158757552;
+    var notes : Text
+  };
+type AnnouncementId__668593068 = Nat;
+type AnnouncementType__207101522 =
+  {#emergency; #opportunity; #policy_update; #subsidy; #training};
+type AppStatus__228592513 = {#approved; #pending; #rejected};
+type ApplicationStatus__107207284 = {#accepted; #declined; #pending};
+type AuctionBid__810825193 =
+  {
+    auctionId : AuctionId__618595027;
+    bidAmount : Nat;
+    bidderId : UserId__158757552;
+    id : BidId__839254788;
+    isWinning : Bool;
+    placedAt : Timestamp__301639476
+  };
+type AuctionId__618595027 = Nat;
+type AuctionListingType__160415066 = {#crop; #livestock};
+type AuctionListing__45654971 =
+  {
+    bidCount : Nat;
+    currentBid : Nat;
+    currentBidderId : ?UserId__158757552;
+    description : Text;
+    endTime : Timestamp__301639476;
+    id : AuctionId__618595027;
+    images : [Text];
+    isAnonymousBidding : Bool;
+    listingType : AuctionListingType__160415066;
+    quantity : Nat;
+    region : Text;
+    sellerId : UserId__158757552;
+    startTime : Timestamp__301639476;
+    startingPrice : Nat;
+    status : AuctionStatus__598946973;
+    title : Text;
+    unit : Text
+  };
+type AuctionResult__380167821 =
+  {
+    auctionId : AuctionId__618595027;
+    completedAt : ?Timestamp__301639476;
+    finalPrice : Nat;
+    sellerAccepted : ?Bool;
+    winnerId : ?UserId__158757552
+  };
+type AuctionStatus__598946973 = {#active; #cancelled; #completed; #ended};
+type BIInsight__794261993 =
+  {
+    descriptionEn : Text;
+    descriptionSw : Text;
+    recommendationEn : Text;
+    recommendationSw : Text;
+    titleEn : Text;
+    titleSw : Text;
+    trend : BITrend__230773424;
+    unit : Text;
+    value : Float
+  };
+type BIPeriod__1015343762 = {#monthly; #quarterly; #weekly};
+type BIReportId__509315295 = Nat;
+type BIReportType__786072377 =
+  {
+    #crop_profitability;
+    #livestock_profitability;
+    #market_opportunity;
+    #profit_forecast
+  };
+type BIReport__134739572 =
+  {
+    generatedAt : Timestamp__301639476;
+    id : BIReportId__509315295;
+    insights : [BIInsight__794261993];
+    period : BIPeriod__1015343762;
+    reportType : BIReportType__786072377;
+    userId : UserId__158757552
+  };
+type BITrend__230773424 = {#down; #flat; #up};
+type BidId__839254788 = Nat;
+type Booking__498193205 =
+  {
+    clientId : UserId__158757552;
+    createdAt : Timestamp__301639476;
+    id : Nat;
+    location : Location__847735819;
+    notes : Text;
+    providerId : UserId__158757552;
+    scheduledAt : Timestamp__301639476;
+    serviceId : Nat;
+    var status : {#cancelled; #completed; #confirmed; #in_progress; #pending};
+    totalPrice : Float
+  };
+type BoundaryType__543973599 = {#farm_field; #grazing_zone; #orchard; #other};
+type BulkBuyId__318152972 = Nat;
+type BulkBuyRequest__279011246 =
+  {
+    createdAt : Timestamp__301639476;
+    groupId : GroupId__523717079;
+    id : BulkBuyId__318152972;
+    itemName : Text;
+    quantity : Float;
+    requesterId : UserId__158757552;
+    responses : [BulkBuyResponse__731087122];
+    status : BulkBuyStatus__453829021;
+    targetDate : Timestamp__301639476;
+    unit : Text
+  };
+type BulkBuyResponse__731087122 =
+  {
+    note : Text;
+    quantity : Float;
+    respondedAt : Timestamp__301639476;
+    responderId : UserId__158757552
+  };
+type BulkBuyStatus__453829021 = {#cancelled; #fulfilled; #open};
+type CalendarEventId__1038892387 = Nat;
+type CalendarEventType__957601412 =
+  {
+    #breeding;
+    #deworming;
+    #feeding;
+    #fertilizer;
+    #harvest;
+    #healthCheck;
+    #irrigation;
+    #livestockSale;
+    #marketDay;
+    #pestControl;
+    #planting;
+    #soilTesting;
+    #vaccination;
+    #vetAppointment
+  };
+type CalendarEvent__205613815 =
+  {
+    completed : Bool;
+    createdAt : Timestamp__301639476;
+    date : Text;
+    eventType : CalendarEventType__957601412;
+    id : CalendarEventId__1038892387;
+    notes : ?Text;
+    recurring : RecurringPattern__267518026;
+    recurringEndDate : ?Text;
+    time : ?Text;
+    title : Text;
+    userId : UserId__158757552
+  };
+type CarbonCertId__916549349 = Nat;
+type CarbonCertification__434806203 =
+  {
+    awardedAt : Int;
+    id : CarbonCertId__916549349;
+    level : CertificationLevel__138465041;
+    owner : Principal;
+    totalPoints : Nat
+  };
+type CarbonPracticeId__587241416 = Nat;
+type CarbonPractice__331724427 =
+  {
+    carbonImpactKg : Nat;
+    dateLogged : Int;
+    description : Text;
+    id : CarbonPracticeId__587241416;
+    owner : Principal;
+    pointsAwarded : Nat;
+    practiceType : PracticeType__220335050
+  };
+type CategoryId__612230848 = Nat;
+type CertificationLevel__138465041 =
+  {#carbonChampion; #soilSteward; #waterGuardian};
+type ClaimId__1032940062 = Nat;
+type ClaimStatus__801607908 =
+  {#approved; #filed; #paid; #rejected; #underReview};
+type ClaimType__498529037 = {#drought; #flood; #other; #pestDisease; #theft};
+type ContentCategory__783511404 =
+  {#energy; #grazing; #pesticide; #soil; #water};
+type ContentType__309948380 = {#article; #guide; #tip};
+type ContractId__2592941 = Nat;
+type ContractStatus__115676037 =
+  {#active; #completed; #disputed; #draft; #pending_acceptance};
+type ContractTemplateType__29992507 =
+  {#crop_sale; #delivery_agreement; #service_agreement};
+type ConversationId__966455625 = Nat;
+type Conversation__78217734 =
+  {
+    createdAt : Timestamp__301639476;
+    id : ConversationId__966455625;
+    var lastMessageAt : Timestamp__301639476;
+    var lastMessagePreview : Text;
+    participants : [UserId__158757552];
+    subject : ?Text
+  };
+type Coordinate__630844707 = {lat : Float; lng : Float};
+type CoverageType__863214765 = {#crop; #livestock};
+type CropAnalytics__1028628682 =
+  {cropType : Text; quantity : Float; revenue : Float};
+type CropListing__129049924 =
+  {
+    createdAt : Timestamp__301639476;
+    cropType : Text;
+    description : Text;
+    farmerId : UserId__158757552;
+    id : ListingId__58075594;
+    imageUrl : ?Text;
+    var inquiryCount : Nat;
+    var isAvailable : Bool;
+    location : Location__847735819;
+    pricePerKg : Float;
+    quantityKg : Float;
+    var updatedAt : Timestamp__301639476
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DiagnosisId__947385929 = Nat;
+type DiagnosisRequest__239277652 =
+  {
+    animalId : ?Nat;
+    animalType : ?Text;
+    createdAt : Timestamp__301639476;
+    cropType : ?Text;
+    description : Text;
+    diagnosisType : {#animal; #crop; #soil};
+    id : DiagnosisId__947385929;
+    imageData : ?Text;
+    imageUrl : ?Text;
+    location : ?Location__847735819;
+    requesterId : UserId__158757552;
+    symptoms : [Text]
+  };
+type DiagnosisResult__864622706 =
+  {
+    confidence : Float;
+    confidencePercent : Nat;
+    diagnosedAt : Timestamp__301639476;
+    diagnosedBy : {#ai; #specialist : UserId__158757552};
+    diagnosis : Text;
+    diagnosisId : DiagnosisId__947385929;
+    possibleDisease : Text;
+    preventionTips : [Text];
+    recommendations : [Text];
+    recommendedTreatments : [Text];
+    requestId : DiagnosisId__947385929;
+    var reviewNotes : ?Text;
+    var reviewedBy : ?UserId__158757552;
+    var status : DiagnosisStatus__503848886;
+    treatments : [Text]
+  };
+type DiagnosisStatus__503848886 = {#confirmed; #pending_review; #rejected};
+type DigitalContract__251852486 =
+  {
+    amount : Float;
+    counterpartyId : UserId__158757552;
+    counterpartySignedAt : ?Timestamp__301639476;
+    createdAt : Timestamp__301639476;
+    creatorId : UserId__158757552;
+    creatorSignedAt : ?Timestamp__301639476;
+    currency : Text;
+    endDate : Timestamp__301639476;
+    id : ContractId__2592941;
+    partiesNames : Text;
+    startDate : Timestamp__301639476;
+    status : ContractStatus__115676037;
+    templateType : ContractTemplateType__29992507;
+    terms : Text;
+    title : Text;
+    updatedAt : Timestamp__301639476
+  };
+type DigitalRecord__806671631 =
+  {
+    amount : ?Float;
+    category : ?Text;
+    createdAt : Timestamp__301639476;
+    date : Timestamp__301639476;
+    description : Text;
+    id : RecordId__318863026;
+    linkedId : ?Nat;
+    recordType : RecordType__822531763;
+    title : Text;
+    unit : ?Text;
+    userId : UserId__158757552
+  };
+type DroneAnalysis__608874893 =
+  {
+    aiInsights : [AiInsight__957527660];
+    analysisDate : Timestamp__301639476;
+    analysisType : AnalysisType__366851502;
+    farmId : ?Nat;
+    id : AnalysisId__1055697179;
+    imageType : ImageType__506303191;
+    imageUrl : Text;
+    overallHealthScore : ?Float;
+    status : AnalysisStatus__562966819;
+    userId : UserId__158757552
+  };
+type FarmAnalyticsSnapshot__392724321 =
+  {
+    endDate : Timestamp__301639476;
+    generatedAt : Timestamp__301639476;
+    netProfit : Float;
+    period : AnalyticsPeriod__236288905;
+    startDate : Timestamp__301639476;
+    topAnimals : [AnimalAnalytics__257797594];
+    topCrops : [CropAnalytics__1028628682];
+    totalCropsHarvested : Float;
+    totalExpenses : Float;
+    totalLivestockSold : Nat;
+    totalSalesRevenue : Float;
+    userId : UserId__158757552
+  };
+type FarmBoundaryId__563339613 = Nat;
+type FarmBoundary__411469258 =
+  {
+    areaHectares : ?Float;
+    areaLabel : ?Text;
+    boundaryType : BoundaryType__543973599;
+    color : ?Text;
+    coordinates : [Coordinate__630844707];
+    createdAt : Timestamp__301639476;
+    id : FarmBoundaryId__563339613;
+    name : Text;
+    updatedAt : Timestamp__301639476;
+    userId : UserId__158757552
+  };
+type FarmRecord__72898815 =
+  {
+    createdAt : Timestamp__301639476;
+    cropTypes : [Text];
+    farmerId : UserId__158757552;
+    id : Nat;
+    location : Location__847735819;
+    name : Text;
+    sizeHectares : Float;
+    soilPh : ?Float;
+    soilType : ?Text
+  };
+type FarmerProfile__439344585 =
+  {
+    cropTypes : [Text];
+    farmSize : Float;
+    irrigationType : ?Text;
+    soilType : ?Text;
+    userId : UserId__158757552
+  };
+type FarmingGroup__418334880 =
+  {
+    adminId : UserId__158757552;
+    createdAt : Timestamp__301639476;
+    description : Text;
+    id : GroupId__523717079;
+    inviteCode : Text;
+    memberIds : [UserId__158757552];
+    name : Text
+  };
+type ForecastBasis__801477795 =
+  {
+    feedingScore : Float;
+    historyScore : Float;
+    soilScore : Float;
+    weatherScore : Float
+  };
+type ForecastId__176508546 = Nat;
+type ForecastRecord__28599784 =
+  {
+    basedOn : ForecastBasis__801477795;
+    confidenceScore : Float;
+    createdAt : Timestamp__301639476;
+    forecastType : ForecastType__494044121;
+    id : ForecastId__176508546;
+    keyDrivers : [Text];
+    monthlyBreakdown : [MonthlyBreakdown__289666462];
+    predictedValue : Float;
+    sensitivityNote : Text;
+    title : Text;
+    unit : Text;
+    userId : UserId__158757552;
+    validUntil : Timestamp__301639476
+  };
+type ForecastType__494044121 =
+  {#crop_yield; #egg_production; #livestock_weight; #milk_production};
+type ForumCategory__627789997 =
+  {
+    description : Text;
+    descriptionSwahili : Text;
+    icon : Text;
+    id : CategoryId__612230848;
+    name : Text;
+    nameSwahili : Text;
+    var postCount : Nat
+  };
+type ForumReply__464586310 =
+  {
+    authorId : UserId__158757552;
+    authorName : Text;
+    authorRole : UserRole__451090586;
+    body : Text;
+    createdAt : Timestamp__301639476;
+    id : ReplyId__793029053;
+    var isAccepted : Bool;
+    topicId : TopicId__359733825;
+    var upvoteCount : Nat
+  };
+type ForumTopic__137470103 =
+  {
+    authorId : UserId__158757552;
+    authorName : Text;
+    authorRole : UserRole__451090586;
+    body : Text;
+    categoryId : CategoryId__612230848;
+    createdAt : Timestamp__301639476;
+    id : TopicId__359733825;
+    var isResolved : Bool;
+    language : Language__22065978;
+    var replyCount : Nat;
+    tags : [Text];
+    title : Text;
+    var updatedAt : Timestamp__301639476;
+    var viewCount : Nat
+  };
+type GovtNGOAnnouncement__345328104 =
+  {
+    announcementType : AnnouncementType__207101522;
+    attachmentUrl : ?Text;
+    authorId : UserId__158757552;
+    authorName : Text;
+    authorOrganization : Text;
+    bodyEn : Text;
+    bodySw : Text;
+    contactInfo : ?Text;
+    createdAt : Timestamp__301639476;
+    endDate : ?Timestamp__301639476;
+    id : AnnouncementId__668593068;
+    isActive : Bool;
+    region : Text;
+    startDate : Timestamp__301639476;
+    titleEn : Text;
+    titleSw : Text
+  };
+type GroupId__523717079 = Nat;
+type GroupListingId__458216993 = Nat;
+type GroupListing__416336725 =
+  {
+    createdAt : Timestamp__301639476;
+    description : Text;
+    groupId : GroupId__523717079;
+    id : GroupListingId__458216993;
+    listingIds : [ListingId__58075594];
+    title : Text
+  };
+type GroupMemberRole__255246894 = {#admin; #member};
+type GroupMembership__471109677 =
+  {
+    groupId : GroupId__523717079;
+    joinedAt : Timestamp__301639476;
+    role : GroupMemberRole__255246894;
+    userId : UserId__158757552
+  };
+type ImageType__506303191 = {#drone; #satellite};
+type ImprovementSuggestion__209804495 =
+  {
+    category : Text;
+    createdAt : Int;
+    id : InsightSuggestionId__679016489;
+    suggestionText : Text;
+    userId : Principal
+  };
+type InputProduct__891952821 =
+  {
+    category : {#equipment; #feed; #fertilizer; #other; #pesticide; #seeds};
+    createdAt : Timestamp__301639476;
+    description : Text;
+    id : Nat;
+    imageUrl : ?Text;
+    var inquiryCount : Nat;
+    var isAvailable : Bool;
+    name : Text;
+    pricePerUnit : Float;
+    sellerId : UserId__158757552;
+    var stockQuantity : Float;
+    unit : Text;
+    var updatedAt : Timestamp__301639476
+  };
+type InsightSeverity__604486701 = {#critical; #high; #low; #medium};
+type InsightSuggestionId__679016489 = Nat;
+type InsuranceAppId__176163295 = Nat;
+type InsuranceApplication__360342036 =
+  {
+    applicant : Principal;
+    coverageType : CoverageType__863214765;
+    createdAt : Int;
+    description : Text;
+    estimatedValue : Nat;
+    id : InsuranceAppId__176163295;
+    status : AppStatus__228592513;
+    supportingNotes : Text
+  };
+type InsuranceClaim__191007795 =
+  {
+    applicationId : InsuranceAppId__176163295;
+    claimType : ClaimType__498529037;
+    claimant : Principal;
+    createdAt : Int;
+    damageDescription : Text;
+    estimatedLoss : Nat;
+    evidenceNotes : Text;
+    id : ClaimId__1032940062;
+    status : ClaimStatus__801607908
+  };
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type InventoryCategory__1059019238 =
+  {#equipment; #feed; #fertilizer; #medicine; #other; #seeds};
+type InventoryChangeType__24631407 = {#adjustment; #restock; #usage};
+type InventoryHistory__646486742 =
+  {
+    changeType : InventoryChangeType__24631407;
+    delta : Float;
+    itemId : InventoryItemId__179079583;
+    note : Text;
+    timestamp : Timestamp__301639476
+  };
+type InventoryItemId__179079583 = Nat;
+type InventoryItem__416531074 =
+  {
+    category : InventoryCategory__1059019238;
+    createdAt : Timestamp__301639476;
+    id : InventoryItemId__179079583;
+    lastRestockedAt : ?Timestamp__301639476;
+    name : Text;
+    ownerId : UserId__158757552;
+    quantity : Float;
+    reorderLevel : Float;
+    supplierContact : ?Text;
+    unit : Text
+  };
+type IrrigationBasis__342709302 =
+  {seasonalCondition : Text; soilMoisture : Text; weatherForecast : Text};
+type IrrigationId__1054838026 = Nat;
+type IrrigationLogId__76718825 = Nat;
+type IrrigationLog__576976774 =
+  {
+    actualWaterUseLiters : ?Nat;
+    followedOn : Timestamp__301639476;
+    id : IrrigationLogId__76718825;
+    notes : ?Text;
+    recommendationId : IrrigationId__1054838026;
+    userId : UserId__158757552
+  };
+type IrrigationRecommendation__931476471 =
+  {
+    basedOn : IrrigationBasis__342709302;
+    createdAt : Timestamp__301639476;
+    cropType : Text;
+    estimatedWaterSavingPercent : Nat;
+    hasSetReminder : Bool;
+    id : IrrigationId__1054838026;
+    reasoning : Text;
+    region : Text;
+    schedule : IrrigationSchedule__245919810;
+    userId : UserId__158757552;
+    validUntil : Timestamp__301639476;
+    yieldImpactPercent : Int
+  };
+type IrrigationSchedule__245919810 =
+  {bestTimeOfDay : Text; durationMinutes : Nat; frequencyPerWeek : Nat};
+type JobApplicationId__727768320 = Nat;
+type JobApplication__505394695 =
+  {
+    applicant : Principal;
+    appliedAt : Int;
+    coverNote : Text;
+    id : JobApplicationId__727768320;
+    jobId : JobId__497975787;
+    status : ApplicationStatus__107207284
+  };
+type JobId__497975787 = Nat;
+type JobListing__447023635 =
+  {
+    createdAt : Int;
+    deadline : Int;
+    description : Text;
+    employer : Principal;
+    id : JobId__497975787;
+    jobType : JobType__151888355;
+    location : Text;
+    payRate : Text;
+    requiredSkills : [Text];
+    status : JobStatus__844324851;
+    title : Text
+  };
+type JobRatingId__580899175 = Nat;
+type JobRating__103551276 =
+  {
+    comment : Text;
+    createdAt : Int;
+    id : JobRatingId__580899175;
+    jobId : JobId__497975787;
+    ratee : Principal;
+    rater : Principal;
+    stars : Nat
+  };
+type JobStatus__844324851 = {#cancelled; #completed; #filled; #open};
+type JobType__151888355 =
+  {#harvesting; #livestockCare; #other; #planting; #spraying; #transport};
+type Language__22065978 = {#english; #swahili};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type ListingId__58075594 = Nat;
+type ListingType__827828483 = {#animal; #crop; #input; #service; #transport};
+type Listing__586492564 =
+  {
+    createdAt : Timestamp__301639476;
+    description : Text;
+    id : ListingId__58075594;
+    imageUrls : [Text];
+    var inquiryCount : Nat;
+    var isActive : Bool;
+    listingType : ListingType__827828483;
+    location : Location__847735819;
+    price : Float;
+    quantity : ?Float;
+    sellerId : UserId__158757552;
+    tags : [Text];
+    title : Text;
+    unit : ?Text;
+    var updatedAt : Timestamp__301639476
+  };
+type LivestockProfile__294062959 =
+  {
+    animalTypes : [Text];
+    farmLocation : Location__847735819;
+    totalHeadCount : Nat;
+    userId : UserId__158757552
+  };
+type LoanApplication__658244092 =
+  {
+    activitySummary : Text;
+    amount : Float;
+    applicantId : UserId__158757552;
+    createdAt : Timestamp__301639476;
+    durationMonths : Nat;
+    id : LoanId__995201388;
+    lenderNotes : ?Text;
+    purpose : Text;
+    repaymentTerms : Text;
+    status : LoanStatus__480727638;
+    updatedAt : Timestamp__301639476
+  };
+type LoanId__995201388 = Nat;
+type LoanStatus__480727638 = {#approved; #pending; #rejected; #under_review};
+type Location__847735819 =
+  {
+    coordinates : ?{lat : Float; lng : Float};
+    district : Text;
+    region : Text;
+    village : Text
+  };
+type MarketPrice__90538019 =
+  {
+    commodity : Text;
+    commodityType : {#animal; #crop; #input};
+    id : Nat;
+    market : Text;
+    pricePerUnit : Float;
+    recordedBy : UserId__158757552;
+    region : Text;
+    unit : Text;
+    var updatedAt : Timestamp__301639476
+  };
+type MarketRecommendation__311883601 =
+  {
+    action : {#buy; #hold; #sell; #wait};
+    advisorId : UserId__158757552;
+    commodity : Text;
+    createdAt : Timestamp__301639476;
+    id : Nat;
+    reasoning : Text;
+    recommendation : Text;
+    targetDate : ?Timestamp__301639476;
+    targetPrice : ?Float
+  };
+type MessageId__291319400 = Nat;
+type Message__804209456 =
+  {
+    content : Text;
+    conversationId : ConversationId__966455625;
+    id : MessageId__291319400;
+    imageUrl : ?Text;
+    var isRead : Bool;
+    senderId : UserId__158757552;
+    sentAt : Timestamp__301639476
+  };
+type MonthlyBreakdown__289666462 = {month : Text; value : Float};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NotificationId__307495059 = Nat;
+type NotificationPriority__807813018 = {#critical; #high; #normal};
+type NotificationType__338939744 =
+  {
+    #badge_earned;
+    #contract_pending;
+    #disease_alert;
+    #govt_announcement;
+    #group_invite;
+    #loan_status_update;
+    #low_stock_alert;
+    #message;
+    #order_update;
+    #pest_outbreak;
+    #price_update;
+    #service_request;
+    #vaccination_reminder;
+    #weather_alert
+  };
+type Notification__264708741 =
+  {
+    body : Text;
+    createdAt : Timestamp__301639476;
+    id : NotificationId__307495059;
+    var isRead : Bool;
+    notificationType : NotificationType__338939744;
+    priority : NotificationPriority__807813018;
+    recipientId : UserId__158757552;
+    relatedId : ?Nat;
+    title : Text
+  };
+type OrderChainEntry__74944864 =
+  {
+    buyerId : UserId__158757552;
+    date : Timestamp__301639476;
+    orderId : OrderId__197865225;
+    status : Text
+  };
+type OrderId__197865225 = Nat;
+type OrderStatus__393009242 =
+  {#cancelled; #confirmed; #delivered; #in_transit; #pending};
+type Order__308187248 =
+  {
+    buyerId : UserId__158757552;
+    createdAt : Timestamp__301639476;
+    deliveryAddress : Location__847735819;
+    id : OrderId__197865225;
+    listingId : ListingId__58075594;
+    notes : Text;
+    quantity : Float;
+    sellerId : UserId__158757552;
+    var status : OrderStatus__393009242;
+    totalPrice : Float;
+    var updatedAt : Timestamp__301639476
+  };
+type OtpRecord__515533055 =
+  {
+    expiresAt : Timestamp__301639476;
+    identifier : Text;
+    var isUsed : Bool;
+    otp : Text
+  };
+type OutbreakAlert__1068607067 =
+  {
+    id : AlertId__60204119;
+    message : Text;
+    outbreakId : OutbreakId__645362707;
+    recipientId : UserId__158757552;
+    sentAt : Timestamp__301639476
+  };
+type OutbreakId__645362707 = Nat;
+type OutbreakRecord__205261418 =
+  {
+    affectedArea : ?Text;
+    coordinates : ?{lat : Float; lng : Float};
+    description : Text;
+    diseaseName : Text;
+    district : ?Text;
+    id : OutbreakId__645362707;
+    isActive : Bool;
+    outbreakType : OutbreakType__318854284;
+    region : Text;
+    reportedAt : Timestamp__301639476;
+    reporterId : UserId__158757552;
+    severity : OutbreakSeverity__916870349
+  };
+type OutbreakSeverity__916870349 = {#critical; #high; #low; #medium};
+type OutbreakType__318854284 =
+  {#crop_disease; #drought; #livestock_infection; #pest_invasion};
+type PaymentId__1028686908 = Nat;
+type PaymentMethod__46913440 =
+  {#airtel_money; #cash; #crdb; #mpesa; #nmb; #tigo_pesa};
+type PaymentStatus__1050999476 =
+  {#completed; #failed; #held; #pending; #refunded};
+type Payment__149302498 =
+  {
+    amount : Float;
+    createdAt : Timestamp__301639476;
+    currency : Text;
+    var escrowNote : ?Text;
+    var heldAt : ?Timestamp__301639476;
+    id : PaymentId__1028686908;
+    method : PaymentMethod__46913440;
+    orderId : ?OrderId__197865225;
+    payeeId : UserId__158757552;
+    payerId : UserId__158757552;
+    reference : Text;
+    var releasedAt : ?Timestamp__301639476;
+    var status : PaymentStatus__1050999476;
+    var updatedAt : Timestamp__301639476
+  };
+type PracticeType__220335050 =
+  {
+    #composting;
+    #ecoPesticide;
+    #soilConservation;
+    #sustainableGrazing;
+    #treePlanting;
+    #waterManagement
+  };
+type PracticeType__74352558 =
+  {
+    #agroforestry;
+    #composting;
+    #crop_rotation;
+    #drip_irrigation;
+    #integrated_pest_management;
+    #organic_fertilizer;
+    #other;
+    #water_harvesting
+  };
+type ProductOrigin__155939031 =
+  {
+    farmName : Text;
+    location : Location__847735819;
+    role : Text;
+    userId : UserId__158757552
+  };
+type ProductTraceability__217128322 =
+  {
+    createdAt : Timestamp__301639476;
+    id : TraceabilityId__616527967;
+    listingId : ListingId__58075594;
+    orderChain : [OrderChainEntry__74944864];
+    origin : ProductOrigin__155939031;
+    productionHistory : [TraceabilityEvent__167420992];
+    qrCodeId : QrCodeId__639897527;
+    specialistNotes : [SpecialistNote__459584899]
+  };
+type QrCodeId__639897527 = Text;
+type RatingRecord__233883754 =
+  {
+    comment : ?Text;
+    createdAt : Timestamp__301639476;
+    fromUserId : UserId__158757552;
+    id : Nat;
+    rating : Nat;
+    toUserId : UserId__158757552
+  };
+type RecordId__318863026 = Nat;
+type RecordType__822531763 =
+  {#crop_planting; #expense; #harvest; #health_event; #sale; #vaccination};
+type RecurringPattern__267518026 =
+  {#daily; #monthly; #none; #weekly; #yearly};
+type ReplyId__793029053 = Nat;
+type ReputationUpvote__620796545 =
+  {createdAt : Timestamp__301639476; replyId : Nat; voterId : Principal};
+type ServiceListing__518069152 =
+  {
+    coverageAreas : [Text];
+    createdAt : Timestamp__301639476;
+    description : Text;
+    equipment : [Text];
+    id : Nat;
+    var inquiryCount : Nat;
+    var isAvailable : Bool;
+    priceRange : {max : Float; min : Float};
+    providerId : UserId__158757552;
+    serviceType : Text;
+    var updatedAt : Timestamp__301639476
+  };
+type SoilReport__472590725 =
+  {
+    createdAt : Timestamp__301639476;
+    farmId : Nat;
+    id : Nat;
+    nutrients : {nitrogen : Float; phosphorus : Float; potassium : Float};
+    phLevel : Float;
+    recommendations : [Text];
+    specialistId : UserId__158757552;
+    suitableCrops : [Text];
+    texture : Text
+  };
+type SpecialistDiagnosisAttachment__1021805155 =
+  {
+    attachedAt : Timestamp__301639476;
+    diagnosisId : Text;
+    notes : Text;
+    photoUrls : [Text];
+    specialistId : UserId__158757552
+  };
+type SpecialistNote__459584899 =
+  {
+    date : Timestamp__301639476;
+    note : Text;
+    photoUrls : [Text];
+    specialistId : UserId__158757552;
+    specialistRole : Text
+  };
+type SpecialistProfile__20561140 =
+  {
+    var isAvailable : Bool;
+    qualifications : [Text];
+    specialization : Text;
+    userId : UserId__158757552;
+    yearsExperience : Nat
+  };
+type SustainabilityContentId__1052707776 = Nat;
+type SustainabilityContent__1031638635 =
+  {
+    bodyEn : Text;
+    bodySw : Text;
+    category : ContentCategory__783511404;
+    contentType : ContentType__309948380;
+    createdAt : Timestamp__301639476;
+    id : SustainabilityContentId__1052707776;
+    title : Text
+  };
+type SustainabilityRecordId__445207791 = Nat;
+type SustainabilityRecord__57254783 =
+  {
+    createdAt : Timestamp__301639476;
+    dateImplemented : Timestamp__301639476;
+    description : Text;
+    id : SustainabilityRecordId__445207791;
+    impactScore : ?Float;
+    practiceType : PracticeType__74352558;
+    userId : UserId__158757552
+  };
+type Timestamp__301639476 = Int;
+type TopicId__359733825 = Nat;
+type TraceabilityEvent__167420992 =
+  {
+    date : Timestamp__301639476;
+    description : Text;
+    eventType : Text;
+    performedBy : UserId__158757552
+  };
+type TraceabilityId__616527967 = Nat;
+type TransportAvailabilityStatus__803681490 =
+  {#available; #fullyBooked; #limited};
+type TransportBookingId__554548451 = Nat;
+type TransportBookingStatus__86892152 =
+  {#cancelled; #confirmed; #delivered; #inTransit; #pending};
+type TransportBooking__48450033 =
+  {
+    createdAt : Timestamp__301639476;
+    deliveryAddress : Text;
+    distanceKm : Float;
+    id : TransportBookingId__554548451;
+    pickupAddress : Text;
+    providerId : UserId__158757552;
+    ratePerKm : Float;
+    selectedTimeSlot : Text;
+    status : TransportBookingStatus__86892152;
+    totalCost : Float;
+    userId : UserId__158757552
+  };
+type TransportListing__240369565 =
+  {
+    capacityTons : Float;
+    coverageAreas : [Text];
+    createdAt : Timestamp__301639476;
+    id : Nat;
+    var inquiryCount : Nat;
+    var isAvailable : Bool;
+    pricePerKm : Float;
+    providerId : UserId__158757552;
+    var updatedAt : Timestamp__301639476;
+    vehicleType : Text
+  };
+type TransportTimeSlot__496677785 =
+  {
+    availabilityStatus : TransportAvailabilityStatus__803681490;
+    providerId : UserId__158757552;
+    slots : [Text]
+  };
+type TreatmentRecord__487488008 =
+  {
+    animalId : Nat;
+    var completedAt : ?Timestamp__301639476;
+    diagnosis : Text;
+    id : Nat;
+    medication : [Text];
+    notes : Text;
+    startedAt : Timestamp__301639476;
+    treatment : Text;
+    vetId : UserId__158757552
+  };
+type UserId__158757552 = Principal;
+type UserProfile__277265826 =
+  {
+    createdAt : Timestamp__301639476;
+    email : Text;
+    id : UserId__158757552;
+    var isActive : Bool;
+    var isVerified : Bool;
+    language : Language__22065978;
+    location : Location__847735819;
+    name : Text;
+    nationalId : ?Text;
+    var passwordHash : Text;
+    phone : Text;
+    var profilePictureUrl : ?Text;
+    role : UserRole__451090586
+  };
+type UserRole__451090586 =
+  {
+    #agri_specialist;
+    #buyer;
+    #farmer;
+    #input_seller;
+    #input_service_provider;
+    #livestock_keeper;
+    #market_advisor;
+    #transport_provider;
+    #veterinarian;
+    #weather_soil_specialist
+  };
+type VaccinationRecord__448577575 =
+  {
+    administeredAt : Timestamp__301639476;
+    administeredBy : ?UserId__158757552;
+    animalId : Nat;
+    id : Nat;
+    keeperId : UserId__158757552;
+    nextDueAt : ?Timestamp__301639476;
+    notes : Text;
+    vaccineName : Text
+  };
+type WorkerProfileId__781743014 = Nat;
+type WorkerProfile__61293162 =
+  {
+    availability : Text;
+    bio : Text;
+    createdAt : Int;
+    id : WorkerProfileId__781743014;
+    name : Text;
+    owner : Principal;
+    rating : Float;
+    ratingCount : Nat;
+    serviceArea : Text;
+    skills : [Text]
+  };
+actor {
+  stable analyticsSnapshots :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FarmAnalyticsSnapshot__392724321]];
+      var elementIndex : Nat__490723111
+    };
+  stable animalListings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AnimalListing__191285102]];
+      var elementIndex : Nat__490723111
+    };
+  stable animalRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AnimalRecord__838359387]];
+      var elementIndex : Nat__490723111
+    };
+  stable auctionBids :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuctionBid__810825193]];
+      var elementIndex : Nat__490723111
+    };
+  stable auctionResults :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuctionResult__380167821]];
+      var elementIndex : Nat__490723111
+    };
+  stable auctionState : {var nextAuctionId : Nat; var nextBidId : Nat};
+  stable auctions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuctionListing__45654971]];
+      var elementIndex : Nat__490723111
+    };
+  stable biReports :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?BIReport__134739572]];
+      var elementIndex : Nat__490723111
+    };
+  stable biState : {var nextBIReportId : Nat};
+  stable bookings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Booking__498193205]];
+      var elementIndex : Nat__490723111
+    };
+  stable bulkBuyRequests :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?BulkBuyRequest__279011246]];
+      var elementIndex : Nat__490723111
+    };
+  stable calendarEvents :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?CalendarEvent__205613815]];
+      var elementIndex : Nat__490723111
+    };
+  stable calendarNextId : Nat;
+  stable carbonCerts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?CarbonCertification__434806203]];
+      var elementIndex : Nat__490723111
+    };
+  stable carbonPractices :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?CarbonPractice__331724427]];
+      var elementIndex : Nat__490723111
+    };
+  stable carbonState : {var nextCertId : Nat; var nextPracticeId : Nat};
+  stable conversations :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Conversation__78217734]];
+      var elementIndex : Nat__490723111
+    };
+  stable cropListings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?CropListing__129049924]];
+      var elementIndex : Nat__490723111
+    };
+  stable dcState : {var nextContractId : Nat};
+  stable diagnosisRequests :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DiagnosisRequest__239277652]];
+      var elementIndex : Nat__490723111
+    };
+  stable diagnosisResults :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DiagnosisResult__864622706]];
+      var elementIndex : Nat__490723111
+    };
+  stable digitalContracts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DigitalContract__251852486]];
+      var elementIndex : Nat__490723111
+    };
+  stable digitalRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DigitalRecord__806671631]];
+      var elementIndex : Nat__490723111
+    };
+  stable drState : {var nextRecordId : Nat};
+  stable droneAnalyses :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DroneAnalysis__608874893]];
+      var elementIndex : Nat__490723111
+    };
+  stable droneState : {var nextAnalysisId : Nat};
+  stable farmBoundaries :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FarmBoundary__411469258]];
+      var elementIndex : Nat__490723111
+    };
+  stable farmerProfiles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FarmerProfile__439344585]];
+      var elementIndex : Nat__490723111
+    };
+  stable farmingGroups :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FarmingGroup__418334880]];
+      var elementIndex : Nat__490723111
+    };
+  stable farms :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FarmRecord__72898815]];
+      var elementIndex : Nat__490723111
+    };
+  stable fbState : {var nextBoundaryId : Nat};
+  stable fgState :
+    {
+      var nextBulkBuyId : Nat;
+      var nextGroupId : Nat;
+      var nextGroupListingId : Nat
+    };
+  stable forecastState : {var nextForecastId : Nat};
+  stable forecasts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ForecastRecord__28599784]];
+      var elementIndex : Nat__490723111
+    };
+  stable forumCategories :
+    {
+      var root :
+        Node__46230540<CategoryId__612230848, ForumCategory__627789997>;
+      var size : Nat__490723111
+    };
+  stable forumReplies :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ForumReply__464586310]];
+      var elementIndex : Nat__490723111
+    };
+  stable forumState : {var nextReplyId : Nat; var nextTopicId : Nat};
+  stable forumTopics :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ForumTopic__137470103]];
+      var elementIndex : Nat__490723111
+    };
+  stable gnState : {var nextAnnouncementId : Nat};
+  stable govtNgoAnnouncements :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?GovtNGOAnnouncement__345328104]];
+      var elementIndex : Nat__490723111
+    };
+  stable groupListings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?GroupListing__416336725]];
+      var elementIndex : Nat__490723111
+    };
+  stable groupMemberships :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?GroupMembership__471109677]];
+      var elementIndex : Nat__490723111
+    };
+  stable improvementSuggestions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ImprovementSuggestion__209804495]];
+      var elementIndex : Nat__490723111
+    };
+  stable inputProducts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?InputProduct__891952821]];
+      var elementIndex : Nat__490723111
+    };
+  stable insightState : {var nextSuggestionId : Nat};
+  stable insuranceApplications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?InsuranceApplication__360342036]];
+      var elementIndex : Nat__490723111
+    };
+  stable insuranceClaims :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?InsuranceClaim__191007795]];
+      var elementIndex : Nat__490723111
+    };
+  stable insuranceState :
+    {var nextClaimId : Nat; var nextInsuranceAppId : Nat};
+  stable invState : {var nextInventoryItemId : Nat};
+  stable inventoryHistory :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?InventoryHistory__646486742]];
+      var elementIndex : Nat__490723111
+    };
+  stable inventoryItems :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?InventoryItem__416531074]];
+      var elementIndex : Nat__490723111
+    };
+  stable irrigationLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?IrrigationLog__576976774]];
+      var elementIndex : Nat__490723111
+    };
+  stable irrigationRecommendations :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?IrrigationRecommendation__931476471]];
+      var elementIndex : Nat__490723111
+    };
+  stable irrigationState : {var nextIrrigationId : Nat; var nextLogId : Nat};
+  stable jobApplications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?JobApplication__505394695]];
+      var elementIndex : Nat__490723111
+    };
+  stable jobRatings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?JobRating__103551276]];
+      var elementIndex : Nat__490723111
+    };
+  stable jobState :
+    {
+      var nextApplicationId : Nat;
+      var nextJobId : Nat;
+      var nextJobRatingId : Nat;
+      var nextWorkerProfileId : Nat
+    };
+  stable jobs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?JobListing__447023635]];
+      var elementIndex : Nat__490723111
+    };
+  stable listings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Listing__586492564]];
+      var elementIndex : Nat__490723111
+    };
+  stable livestockProfiles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?LivestockProfile__294062959]];
+      var elementIndex : Nat__490723111
+    };
+  stable lnState : {var nextLoanId : Nat};
+  stable loanApplications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?LoanApplication__658244092]];
+      var elementIndex : Nat__490723111
+    };
+  stable marketPrices :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MarketPrice__90538019]];
+      var elementIndex : Nat__490723111
+    };
+  stable marketRecommendations :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MarketRecommendation__311883601]];
+      var elementIndex : Nat__490723111
+    };
+  stable messages :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Message__804209456]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextAnimalId : Nat;
+  stable nextAnimalListingId : Nat;
+  stable nextBookingId : Nat;
+  stable nextConvId : Nat;
+  stable nextDiagnosisId : Nat;
+  stable nextFarmId : Nat;
+  stable nextFarmListingId : Nat;
+  stable nextListingId : Nat;
+  stable nextMsgId : Nat;
+  stable nextOrderId : Nat;
+  stable nextPaymentId : Nat;
+  stable nextPriceId : Nat;
+  stable nextProductId : Nat;
+  stable nextRatingId : Nat;
+  stable nextRecommendationId : Nat;
+  stable nextServiceId : Nat;
+  stable nextSoilReportId : Nat;
+  stable nextTransportId : Nat;
+  stable nextTreatmentId : Nat;
+  stable nextUserId : Nat;
+  stable nextVaccinationId : Nat;
+  stable notifState : {var nextNotifId : Nat};
+  stable notifications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Notification__264708741]];
+      var elementIndex : Nat__490723111
+    };
+  stable orders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Order__308187248]];
+      var elementIndex : Nat__490723111
+    };
+  stable otps :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?OtpRecord__515533055]];
+      var elementIndex : Nat__490723111
+    };
+  stable outbreakAlerts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?OutbreakAlert__1068607067]];
+      var elementIndex : Nat__490723111
+    };
+  stable outbreakState : {var nextAlertId : Nat; var nextOutbreakId : Nat};
+  stable outbreaks :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?OutbreakRecord__205261418]];
+      var elementIndex : Nat__490723111
+    };
+  stable payments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Payment__149302498]];
+      var elementIndex : Nat__490723111
+    };
+  stable ratings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?RatingRecord__233883754]];
+      var elementIndex : Nat__490723111
+    };
+  stable reputationUpvotes :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ReputationUpvote__620796545]];
+      var elementIndex : Nat__490723111
+    };
+  stable serviceListings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ServiceListing__518069152]];
+      var elementIndex : Nat__490723111
+    };
+  stable soilReports :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SoilReport__472590725]];
+      var elementIndex : Nat__490723111
+    };
+  stable specialistAttachments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SpecialistDiagnosisAttachment__1021805155]];
+      var elementIndex : Nat__490723111
+    };
+  stable specialistProfiles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SpecialistProfile__20561140]];
+      var elementIndex : Nat__490723111
+    };
+  stable susState :
+    {
+      var nextSustainabilityContentId : Nat;
+      var nextSustainabilityRecordId : Nat
+    };
+  stable sustainabilityContent :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SustainabilityContent__1031638635]];
+      var elementIndex : Nat__490723111
+    };
+  stable sustainabilityRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SustainabilityRecord__57254783]];
+      var elementIndex : Nat__490723111
+    };
+  stable trState : {var nextTraceabilityId : Nat};
+  stable traceabilityRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ProductTraceability__217128322]];
+      var elementIndex : Nat__490723111
+    };
+  stable transportBookingNextId : Nat;
+  stable transportBookings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?TransportBooking__48450033]];
+      var elementIndex : Nat__490723111
+    };
+  stable transportListings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?TransportListing__240369565]];
+      var elementIndex : Nat__490723111
+    };
+  stable transportTimeSlots :
+    {
+      var root :
+        Node__46230540<UserId__158757552, TransportTimeSlot__496677785>;
+      var size : Nat__490723111
+    };
+  stable treatmentRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?TreatmentRecord__487488008]];
+      var elementIndex : Nat__490723111
+    };
+  stable users :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?UserProfile__277265826]];
+      var elementIndex : Nat__490723111
+    };
+  stable vaccinationRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?VaccinationRecord__448577575]];
+      var elementIndex : Nat__490723111
+    };
+  stable weeklyState :
+    {var weekStart : Nat; var weeklyActivities : [(Principal, Nat)]};
+  stable workerProfiles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?WorkerProfile__61293162]];
+      var elementIndex : Nat__490723111
+    }
+};

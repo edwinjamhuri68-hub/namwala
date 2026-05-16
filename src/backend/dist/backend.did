@@ -1,0 +1,1942 @@
+type WorkerProfileId = nat;
+type WorkerProfile = 
+ record {
+   availability: text;
+   bio: text;
+   createdAt: int;
+   id: WorkerProfileId;
+   name: text;
+   owner: principal;
+   rating: float64;
+   ratingCount: nat;
+   serviceArea: text;
+   skills: vec text;
+ };
+type WeeklyLeaderboardEntry = 
+ record {
+   badges: vec text;
+   region: text;
+   userId: principal;
+   userName: text;
+   userRole: text;
+   weeklyScore: nat;
+ };
+type WeatherData = 
+ record {
+   alert: opt text;
+   forecast: text;
+   humidity: float64;
+   location: Location;
+   rainfallMm: float64;
+   temperature: float64;
+   updatedAt: Timestamp;
+ };
+type VaccinationRecord = 
+ record {
+   administeredAt: Timestamp;
+   administeredBy: opt UserId;
+   animalId: nat;
+   id: nat;
+   keeperId: UserId;
+   nextDueAt: opt Timestamp;
+   notes: text;
+   vaccineName: text;
+ };
+type UserRole = 
+ variant {
+   agri_specialist;
+   buyer;
+   farmer;
+   input_seller;
+   input_service_provider;
+   livestock_keeper;
+   market_advisor;
+   transport_provider;
+   veterinarian;
+   weather_soil_specialist;
+ };
+type UserReputation = 
+ record {
+   badges: vec text;
+   earnedBadgesWithDates: vec record {
+                                text;
+                                int;
+                              };
+   region: text;
+   reputationScore: nat;
+   userId: principal;
+   userName: text;
+   userRole: UserRole;
+ };
+type UserProfilePublic = 
+ record {
+   averageRating: float64;
+   createdAt: Timestamp;
+   email: text;
+   id: UserId;
+   isVerified: bool;
+   language: Language;
+   location: Location;
+   name: text;
+   phone: text;
+   profilePictureUrl: opt text;
+   ratingCount: nat;
+   role: UserRole;
+ };
+type UserId = principal;
+type TrendingCrop = 
+ record {
+   averagePrice: nat;
+   category: text;
+   listingCount: nat;
+   priceGrowthPct: int;
+ };
+type TreatmentRecordPublic = 
+ record {
+   animalId: nat;
+   completedAt: opt Timestamp;
+   diagnosis: text;
+   id: nat;
+   medication: vec text;
+   notes: text;
+   startedAt: Timestamp;
+   treatment: text;
+   vetId: UserId;
+ };
+type TransportTimeSlot = 
+ record {
+   availabilityStatus: TransportAvailabilityStatus;
+   providerId: UserId;
+   slots: vec text;
+ };
+type TransportListingPublic = 
+ record {
+   capacityTons: float64;
+   coverageAreas: vec text;
+   createdAt: Timestamp;
+   id: nat;
+   inquiryCount: nat;
+   isAvailable: bool;
+   pricePerKm: float64;
+   providerId: UserId;
+   updatedAt: Timestamp;
+   vehicleType: text;
+ };
+type TransportBookingStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   delivered;
+   inTransit;
+   pending;
+ };
+type TransportBookingId = nat;
+type TransportBooking = 
+ record {
+   createdAt: Timestamp;
+   deliveryAddress: text;
+   distanceKm: float64;
+   id: TransportBookingId;
+   pickupAddress: text;
+   providerId: UserId;
+   ratePerKm: float64;
+   selectedTimeSlot: text;
+   status: TransportBookingStatus;
+   totalCost: float64;
+   userId: UserId;
+ };
+type TransportAvailabilityStatus = 
+ variant {
+   available;
+   fullyBooked;
+   limited;
+ };
+type TraceabilityId = nat;
+type TraceabilityEvent = 
+ record {
+   date: Timestamp;
+   description: text;
+   eventType: text;
+   performedBy: UserId;
+ };
+type TopicId = nat;
+type TopSeller = 
+ record {
+   averageRating: float64;
+   listingCount: nat;
+   region: text;
+   salesVolume: nat;
+   seller: principal;
+   sellerName: text;
+ };
+type Timestamp = int;
+type SustainabilityRecordId = nat;
+type SustainabilityRecord = 
+ record {
+   createdAt: Timestamp;
+   dateImplemented: Timestamp;
+   description: text;
+   id: SustainabilityRecordId;
+   impactScore: opt float64;
+   practiceType: PracticeType;
+   userId: UserId;
+ };
+type SustainabilityContentId = nat;
+type SustainabilityContent = 
+ record {
+   bodyEn: text;
+   bodySw: text;
+   category: ContentCategory;
+   contentType: ContentType;
+   createdAt: Timestamp;
+   id: SustainabilityContentId;
+   title: text;
+ };
+type SpecialistNote = 
+ record {
+   date: Timestamp;
+   note: text;
+   photoUrls: vec text;
+   specialistId: UserId;
+   specialistRole: text;
+ };
+type SpecialistDiagnosisAttachment = 
+ record {
+   attachedAt: Timestamp;
+   diagnosisId: text;
+   notes: text;
+   photoUrls: vec text;
+   specialistId: UserId;
+ };
+type SoilReport = 
+ record {
+   createdAt: Timestamp;
+   farmId: nat;
+   id: nat;
+   nutrients:
+    record {
+      nitrogen: float64;
+      phosphorus: float64;
+      potassium: float64;
+    };
+   phLevel: float64;
+   recommendations: vec text;
+   specialistId: UserId;
+   suitableCrops: vec text;
+   texture: text;
+ };
+type ServiceListingPublic = 
+ record {
+   coverageAreas: vec text;
+   createdAt: Timestamp;
+   description: text;
+   equipment: vec text;
+   id: nat;
+   inquiryCount: nat;
+   isAvailable: bool;
+   priceRange: record {
+                 max: float64;
+                 min: float64;
+               };
+   providerId: UserId;
+   serviceType: text;
+   updatedAt: Timestamp;
+ };
+type ReplyId = nat;
+type RecurringPattern = 
+ variant {
+   daily;
+   monthly;
+   none;
+   weekly;
+   yearly;
+ };
+type RecordType = 
+ variant {
+   crop_planting;
+   expense;
+   harvest;
+   health_event;
+   sale;
+   vaccination;
+ };
+type RecordId = nat;
+type RatingRecord = 
+ record {
+   comment: opt text;
+   createdAt: Timestamp;
+   fromUserId: UserId;
+   id: nat;
+   rating: nat;
+   toUserId: UserId;
+ };
+type QrCodeId = text;
+type ProductTraceability = 
+ record {
+   createdAt: Timestamp;
+   id: TraceabilityId;
+   listingId: ListingId;
+   orderChain: vec OrderChainEntry;
+   origin: ProductOrigin;
+   productionHistory: vec TraceabilityEvent;
+   qrCodeId: QrCodeId;
+   specialistNotes: vec SpecialistNote;
+ };
+type ProductOrigin = 
+ record {
+   farmName: text;
+   location: Location;
+   role: text;
+   userId: UserId;
+ };
+type PriceTrend = 
+ record {
+   commodity: text;
+   dataPoints: vec record {
+                     Timestamp;
+                     float64;
+                   };
+   region: text;
+   trend: variant {
+            falling;
+            rising;
+            steady;
+          };
+ };
+type PracticeType__1 = 
+ variant {
+   composting;
+   ecoPesticide;
+   soilConservation;
+   sustainableGrazing;
+   treePlanting;
+   waterManagement;
+ };
+type PracticeType = 
+ variant {
+   agroforestry;
+   composting;
+   crop_rotation;
+   drip_irrigation;
+   integrated_pest_management;
+   organic_fertilizer;
+   other;
+   water_harvesting;
+ };
+type PaymentStatus = 
+ variant {
+   completed;
+   failed;
+   held;
+   pending;
+   refunded;
+ };
+type PaymentPublic = 
+ record {
+   amount: float64;
+   createdAt: Timestamp;
+   currency: text;
+   escrowNote: opt text;
+   heldAt: opt Timestamp;
+   id: PaymentId;
+   method: PaymentMethod;
+   orderId: opt OrderId;
+   payeeId: UserId;
+   payerId: UserId;
+   reference: text;
+   releasedAt: opt Timestamp;
+   status: PaymentStatus;
+   updatedAt: Timestamp;
+ };
+type PaymentMethod = 
+ variant {
+   airtel_money;
+   cash;
+   crdb;
+   mpesa;
+   nmb;
+   tigo_pesa;
+ };
+type PaymentId = nat;
+type OutbreakType = 
+ variant {
+   crop_disease;
+   drought;
+   livestock_infection;
+   pest_invasion;
+ };
+type OutbreakSeverity = 
+ variant {
+   critical;
+   high;
+   low;
+   medium;
+ };
+type OutbreakRecord = 
+ record {
+   affectedArea: opt text;
+   coordinates: opt record {
+                      lat: float64;
+                      lng: float64;
+                    };
+   description: text;
+   diseaseName: text;
+   district: opt text;
+   id: OutbreakId;
+   isActive: bool;
+   outbreakType: OutbreakType;
+   region: text;
+   reportedAt: Timestamp;
+   reporterId: UserId;
+   severity: OutbreakSeverity;
+ };
+type OutbreakId = nat;
+type OutbreakFilter = 
+ record {
+   activeOnly: bool;
+   fromDate: opt Timestamp;
+   outbreakType: opt OutbreakType;
+   region: opt text;
+   toDate: opt Timestamp;
+ };
+type OutbreakAlert = 
+ record {
+   id: AlertId;
+   message: text;
+   outbreakId: OutbreakId;
+   recipientId: UserId;
+   sentAt: Timestamp;
+ };
+type OrderStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   delivered;
+   in_transit;
+   pending;
+ };
+type OrderPublic = 
+ record {
+   buyerId: UserId;
+   createdAt: Timestamp;
+   id: OrderId;
+   listingId: ListingId;
+   notes: text;
+   quantity: float64;
+   sellerId: UserId;
+   status: OrderStatus;
+   totalPrice: float64;
+   updatedAt: Timestamp;
+ };
+type OrderId = nat;
+type OrderChainEntry = 
+ record {
+   buyerId: UserId;
+   date: Timestamp;
+   orderId: OrderId;
+   status: text;
+ };
+type NotificationType = 
+ variant {
+   badge_earned;
+   contract_pending;
+   disease_alert;
+   govt_announcement;
+   group_invite;
+   loan_status_update;
+   low_stock_alert;
+   message;
+   order_update;
+   pest_outbreak;
+   price_update;
+   service_request;
+   vaccination_reminder;
+   weather_alert;
+ };
+type NotificationPublic = 
+ record {
+   body: text;
+   createdAt: Timestamp;
+   id: NotificationId;
+   isRead: bool;
+   notificationType: NotificationType;
+   priority: NotificationPriority;
+   recipientId: UserId;
+   relatedId: opt nat;
+   title: text;
+ };
+type NotificationPriority = 
+ variant {
+   critical;
+   high;
+   normal;
+ };
+type NotificationId = nat;
+type MonthlyBreakdown = 
+ record {
+   month: text;
+   value: float64;
+ };
+type MessagePublic = 
+ record {
+   content: text;
+   conversationId: ConversationId;
+   id: MessageId;
+   imageUrl: opt text;
+   isRead: bool;
+   senderId: UserId;
+   sentAt: Timestamp;
+ };
+type MessageId = nat;
+type MarketRecommendation = 
+ record {
+   action: variant {
+             buy;
+             hold;
+             sell;
+             wait;
+           };
+   advisorId: UserId;
+   commodity: text;
+   createdAt: Timestamp;
+   id: nat;
+   reasoning: text;
+   recommendation: text;
+   targetDate: opt Timestamp;
+   targetPrice: opt float64;
+ };
+type MarketPricePublic = 
+ record {
+   commodity: text;
+   commodityType: variant {
+                    animal;
+                    crop;
+                    input;
+                  };
+   id: nat;
+   market: text;
+   pricePerUnit: float64;
+   recordedBy: UserId;
+   region: text;
+   unit: text;
+   updatedAt: Timestamp;
+ };
+type MarketGap = 
+ record {
+   category: text;
+   demandScore: nat;
+   opportunityScore: nat;
+   supplyCount: nat;
+ };
+type Location = 
+ record {
+   coordinates: opt record {
+                      lat: float64;
+                      lng: float64;
+                    };
+   district: text;
+   region: text;
+   village: text;
+ };
+type LoanStatus = 
+ variant {
+   approved;
+   pending;
+   rejected;
+   under_review;
+ };
+type LoanId = nat;
+type LoanApplication = 
+ record {
+   activitySummary: text;
+   amount: float64;
+   applicantId: UserId;
+   createdAt: Timestamp;
+   durationMonths: nat;
+   id: LoanId;
+   lenderNotes: opt text;
+   purpose: text;
+   repaymentTerms: text;
+   status: LoanStatus;
+   updatedAt: Timestamp;
+ };
+type LoanActivitySummary = 
+ record {
+   generatedAt: Timestamp;
+   period: nat;
+   recordCount: nat;
+   totalExpenses: float64;
+   totalSales: float64;
+   transactionCount: nat;
+ };
+type ListingType = 
+ variant {
+   animal;
+   crop;
+   input;
+   "service";
+   transport;
+ };
+type ListingPublic = 
+ record {
+   createdAt: Timestamp;
+   description: text;
+   id: ListingId;
+   imageUrls: vec text;
+   inquiryCount: nat;
+   isActive: bool;
+   listingType: ListingType;
+   location: Location;
+   price: float64;
+   quantity: opt float64;
+   sellerId: UserId;
+   tags: vec text;
+   title: text;
+   unit: opt text;
+   updatedAt: Timestamp;
+ };
+type ListingId = nat;
+type Language = 
+ variant {
+   english;
+   swahili;
+ };
+type JobType = 
+ variant {
+   harvesting;
+   livestockCare;
+   other;
+   planting;
+   spraying;
+   transport;
+ };
+type JobStatus = 
+ variant {
+   cancelled;
+   completed;
+   filled;
+   open;
+ };
+type JobListing = 
+ record {
+   createdAt: int;
+   deadline: int;
+   description: text;
+   employer: principal;
+   id: JobId;
+   jobType: JobType;
+   location: text;
+   payRate: text;
+   requiredSkills: vec text;
+   status: JobStatus;
+   title: text;
+ };
+type JobId = nat;
+type JobApplicationId = nat;
+type JobApplication = 
+ record {
+   applicant: principal;
+   appliedAt: int;
+   coverNote: text;
+   id: JobApplicationId;
+   jobId: JobId;
+   status: ApplicationStatus;
+ };
+type IrrigationSchedule = 
+ record {
+   bestTimeOfDay: text;
+   durationMinutes: nat;
+   frequencyPerWeek: nat;
+ };
+type IrrigationRecommendation = 
+ record {
+   basedOn: IrrigationBasis;
+   createdAt: Timestamp;
+   cropType: text;
+   estimatedWaterSavingPercent: nat;
+   hasSetReminder: bool;
+   id: IrrigationId;
+   reasoning: text;
+   region: text;
+   schedule: IrrigationSchedule;
+   userId: UserId;
+   validUntil: Timestamp;
+   yieldImpactPercent: int;
+ };
+type IrrigationLogId = nat;
+type IrrigationLog = 
+ record {
+   actualWaterUseLiters: opt nat;
+   followedOn: Timestamp;
+   id: IrrigationLogId;
+   notes: opt text;
+   recommendationId: IrrigationId;
+   userId: UserId;
+ };
+type IrrigationId = nat;
+type IrrigationBasis = 
+ record {
+   seasonalCondition: text;
+   soilMoisture: text;
+   weatherForecast: text;
+ };
+type InventoryItemId = nat;
+type InventoryItem = 
+ record {
+   category: InventoryCategory;
+   createdAt: Timestamp;
+   id: InventoryItemId;
+   lastRestockedAt: opt Timestamp;
+   name: text;
+   ownerId: UserId;
+   quantity: float64;
+   reorderLevel: float64;
+   supplierContact: opt text;
+   unit: text;
+ };
+type InventoryHistory = 
+ record {
+   changeType: InventoryChangeType;
+   delta: float64;
+   itemId: InventoryItemId;
+   note: text;
+   timestamp: Timestamp;
+ };
+type InventoryChangeType = 
+ variant {
+   adjustment;
+   restock;
+   usage;
+ };
+type InventoryCategory = 
+ variant {
+   equipment;
+   feed;
+   fertilizer;
+   medicine;
+   other;
+   seeds;
+ };
+type InsuranceClaim = 
+ record {
+   applicationId: InsuranceAppId;
+   claimType: ClaimType;
+   claimant: principal;
+   createdAt: int;
+   damageDescription: text;
+   estimatedLoss: nat;
+   evidenceNotes: text;
+   id: ClaimId;
+   status: ClaimStatus;
+ };
+type InsuranceApplication = 
+ record {
+   applicant: principal;
+   coverageType: CoverageType;
+   createdAt: int;
+   description: text;
+   estimatedValue: nat;
+   id: InsuranceAppId;
+   status: AppStatus;
+   supportingNotes: text;
+ };
+type InsuranceAppId = nat;
+type InsightSuggestionId = nat;
+type InsightSeverity = 
+ variant {
+   critical;
+   high;
+   low;
+   medium;
+ };
+type InputProductPublic = 
+ record {
+   category: variant {
+               equipment;
+               feed;
+               fertilizer;
+               other;
+               pesticide;
+               seeds;
+             };
+   createdAt: Timestamp;
+   description: text;
+   id: nat;
+   imageUrl: opt text;
+   inquiryCount: nat;
+   isAvailable: bool;
+   name: text;
+   pricePerUnit: float64;
+   sellerId: UserId;
+   stockQuantity: float64;
+   unit: text;
+   updatedAt: Timestamp;
+ };
+type ImprovementSuggestion = 
+ record {
+   category: text;
+   createdAt: int;
+   id: InsightSuggestionId;
+   suggestionText: text;
+   userId: principal;
+ };
+type ImageType = 
+ variant {
+   drone;
+   satellite;
+ };
+type GroupMembership = 
+ record {
+   groupId: GroupId;
+   joinedAt: Timestamp;
+   role: GroupMemberRole;
+   userId: UserId;
+ };
+type GroupMemberRole = 
+ variant {
+   admin;
+   member;
+ };
+type GroupListingId = nat;
+type GroupListing = 
+ record {
+   createdAt: Timestamp;
+   description: text;
+   groupId: GroupId;
+   id: GroupListingId;
+   listingIds: vec ListingId;
+   title: text;
+ };
+type GroupId = nat;
+type GovtNGOAnnouncement = 
+ record {
+   announcementType: AnnouncementType;
+   attachmentUrl: opt text;
+   authorId: UserId;
+   authorName: text;
+   authorOrganization: text;
+   bodyEn: text;
+   bodySw: text;
+   contactInfo: opt text;
+   createdAt: Timestamp;
+   endDate: opt Timestamp;
+   id: AnnouncementId;
+   isActive: bool;
+   region: text;
+   startDate: Timestamp;
+   titleEn: text;
+   titleSw: text;
+ };
+type ForumTopicSummary = 
+ record {
+   authorName: text;
+   authorRole: UserRole;
+   categoryId: CategoryId;
+   createdAt: Timestamp;
+   id: TopicId;
+   isResolved: bool;
+   replyCount: nat;
+   title: text;
+   viewCount: nat;
+ };
+type ForumTopicPublic = 
+ record {
+   authorId: UserId;
+   authorName: text;
+   authorRole: UserRole;
+   body: text;
+   categoryId: CategoryId;
+   createdAt: Timestamp;
+   id: TopicId;
+   isResolved: bool;
+   language: Language;
+   replyCount: nat;
+   tags: vec text;
+   title: text;
+   updatedAt: Timestamp;
+   viewCount: nat;
+ };
+type ForumReplyWithUpvotes = 
+ record {
+   authorId: UserId;
+   authorName: text;
+   authorRole: UserRole;
+   body: text;
+   createdAt: Timestamp;
+   hasVoted: bool;
+   id: nat;
+   isAccepted: bool;
+   topicId: nat;
+   upvoteCount: nat;
+ };
+type ForumReplyPublic = 
+ record {
+   authorId: UserId;
+   authorName: text;
+   authorRole: UserRole;
+   body: text;
+   createdAt: Timestamp;
+   id: ReplyId;
+   isAccepted: bool;
+   topicId: TopicId;
+   upvoteCount: nat;
+ };
+type ForumCategoryPublic = 
+ record {
+   description: text;
+   descriptionSwahili: text;
+   icon: text;
+   id: CategoryId;
+   name: text;
+   nameSwahili: text;
+   postCount: nat;
+ };
+type ForecastType = 
+ variant {
+   crop_yield;
+   egg_production;
+   livestock_weight;
+   milk_production;
+ };
+type ForecastRecord = 
+ record {
+   basedOn: ForecastBasis;
+   confidenceScore: float64;
+   createdAt: Timestamp;
+   forecastType: ForecastType;
+   id: ForecastId;
+   keyDrivers: vec text;
+   monthlyBreakdown: vec MonthlyBreakdown;
+   predictedValue: float64;
+   sensitivityNote: text;
+   title: text;
+   unit: text;
+   userId: UserId;
+   validUntil: Timestamp;
+ };
+type ForecastId = nat;
+type ForecastFilter = 
+ record {
+   forecastType: opt ForecastType;
+   userId: opt UserId;
+ };
+type ForecastBasis = 
+ record {
+   feedingScore: float64;
+   historyScore: float64;
+   soilScore: float64;
+   weatherScore: float64;
+ };
+type FarmingGroup = 
+ record {
+   adminId: UserId;
+   createdAt: Timestamp;
+   description: text;
+   id: GroupId;
+   inviteCode: text;
+   memberIds: vec UserId;
+   name: text;
+ };
+type FarmRecord = 
+ record {
+   createdAt: Timestamp;
+   cropTypes: vec text;
+   farmerId: UserId;
+   id: nat;
+   location: Location;
+   name: text;
+   sizeHectares: float64;
+   soilPh: opt float64;
+   soilType: opt text;
+ };
+type FarmBoundaryId = nat;
+type FarmBoundary = 
+ record {
+   areaHectares: opt float64;
+   areaLabel: opt text;
+   boundaryType: BoundaryType;
+   color: opt text;
+   coordinates: vec Coordinate;
+   createdAt: Timestamp;
+   id: FarmBoundaryId;
+   name: text;
+   updatedAt: Timestamp;
+   userId: UserId;
+ };
+type FarmBenchmark = 
+ record {
+   listingCount: nat;
+   orderCount: nat;
+   region: text;
+   regionalAvgListings: nat;
+   regionalAvgOrders: nat;
+   userId: principal;
+ };
+type FarmAnalyticsSnapshot = 
+ record {
+   endDate: Timestamp;
+   generatedAt: Timestamp;
+   netProfit: float64;
+   period: AnalyticsPeriod;
+   startDate: Timestamp;
+   topAnimals: vec AnimalAnalytics;
+   topCrops: vec CropAnalytics;
+   totalCropsHarvested: float64;
+   totalExpenses: float64;
+   totalLivestockSold: nat;
+   totalSalesRevenue: float64;
+   userId: UserId;
+ };
+type EmergencyContact = 
+ record {
+   averageRating: float64;
+   phone: opt text;
+   region: text;
+   reviewCount: nat;
+   userId: principal;
+   userName: text;
+   userRole: text;
+ };
+type DroneAnalysis = 
+ record {
+   aiInsights: vec AiInsight;
+   analysisDate: Timestamp;
+   analysisType: AnalysisType;
+   farmId: opt nat;
+   id: AnalysisId;
+   imageType: ImageType;
+   imageUrl: text;
+   overallHealthScore: opt float64;
+   status: AnalysisStatus;
+   userId: UserId;
+ };
+type DigitalRecord = 
+ record {
+   amount: opt float64;
+   category: opt text;
+   createdAt: Timestamp;
+   date: Timestamp;
+   description: text;
+   id: RecordId;
+   linkedId: opt nat;
+   recordType: RecordType;
+   title: text;
+   unit: opt text;
+   userId: UserId;
+ };
+type DigitalContract = 
+ record {
+   amount: float64;
+   counterpartyId: UserId;
+   counterpartySignedAt: opt Timestamp;
+   createdAt: Timestamp;
+   creatorId: UserId;
+   creatorSignedAt: opt Timestamp;
+   currency: text;
+   endDate: Timestamp;
+   id: ContractId;
+   partiesNames: text;
+   startDate: Timestamp;
+   status: ContractStatus;
+   templateType: ContractTemplateType;
+   terms: text;
+   title: text;
+   updatedAt: Timestamp;
+ };
+type DiagnosisStatus = 
+ variant {
+   confirmed;
+   pending_review;
+   rejected;
+ };
+type DiagnosisResultPublic = 
+ record {
+   confidence: float64;
+   confidencePercent: nat;
+   diagnosedAt: Timestamp;
+   diagnosedBy: variant {
+                  ai;
+                  specialist: UserId;
+                };
+   diagnosis: text;
+   diagnosisId: DiagnosisId;
+   possibleDisease: text;
+   preventionTips: vec text;
+   recommendations: vec text;
+   recommendedTreatments: vec text;
+   requestId: DiagnosisId;
+   reviewNotes: opt text;
+   reviewedBy: opt UserId;
+   status: DiagnosisStatus;
+   treatments: vec text;
+ };
+type DiagnosisRequest = 
+ record {
+   animalId: opt nat;
+   animalType: opt text;
+   createdAt: Timestamp;
+   cropType: opt text;
+   description: text;
+   diagnosisType: variant {
+                    animal;
+                    crop;
+                    soil;
+                  };
+   id: DiagnosisId;
+   imageData: opt text;
+   imageUrl: opt text;
+   location: opt Location;
+   requesterId: UserId;
+   symptoms: vec text;
+ };
+type DiagnosisId = nat;
+type CropListingPublic = 
+ record {
+   createdAt: Timestamp;
+   cropType: text;
+   description: text;
+   farmerId: UserId;
+   id: ListingId;
+   imageUrl: opt text;
+   inquiryCount: nat;
+   isAvailable: bool;
+   location: Location;
+   pricePerKg: float64;
+   quantityKg: float64;
+   updatedAt: Timestamp;
+ };
+type CropAnalytics = 
+ record {
+   cropType: text;
+   quantity: float64;
+   revenue: float64;
+ };
+type CoverageType = 
+ variant {
+   crop;
+   livestock;
+ };
+type Coordinate = 
+ record {
+   lat: float64;
+   lng: float64;
+ };
+type ConversationPublic = 
+ record {
+   createdAt: Timestamp;
+   id: ConversationId;
+   lastMessageAt: Timestamp;
+   lastMessagePreview: text;
+   participants: vec UserId;
+   subject: opt text;
+ };
+type ConversationId = nat;
+type ContractTemplateType = 
+ variant {
+   crop_sale;
+   delivery_agreement;
+   service_agreement;
+ };
+type ContractStatus = 
+ variant {
+   active;
+   completed;
+   disputed;
+   draft;
+   pending_acceptance;
+ };
+type ContractId = nat;
+type ContentType = 
+ variant {
+   article;
+   guide;
+   tip;
+ };
+type ContentCategory = 
+ variant {
+   energy;
+   grazing;
+   pesticide;
+   soil;
+   water;
+ };
+type ClaimType = 
+ variant {
+   drought;
+   flood;
+   other;
+   pestDisease;
+   theft;
+ };
+type ClaimStatus = 
+ variant {
+   approved;
+   filed;
+   paid;
+   rejected;
+   underReview;
+ };
+type ClaimId = nat;
+type CertificationLevel = 
+ variant {
+   carbonChampion;
+   soilSteward;
+   waterGuardian;
+ };
+type CategoryId = nat;
+type CarbonPracticeId = nat;
+type CarbonPractice = 
+ record {
+   carbonImpactKg: nat;
+   dateLogged: int;
+   description: text;
+   id: CarbonPracticeId;
+   owner: principal;
+   pointsAwarded: nat;
+   practiceType: PracticeType__1;
+ };
+type CarbonCertification = 
+ record {
+   awardedAt: int;
+   id: CarbonCertId;
+   level: CertificationLevel;
+   owner: principal;
+   totalPoints: nat;
+ };
+type CarbonCertId = nat;
+type CalendarEventType = 
+ variant {
+   breeding;
+   deworming;
+   feeding;
+   fertilizer;
+   harvest;
+   healthCheck;
+   irrigation;
+   livestockSale;
+   marketDay;
+   pestControl;
+   planting;
+   soilTesting;
+   vaccination;
+   vetAppointment;
+ };
+type CalendarEventId = nat;
+type CalendarEvent = 
+ record {
+   completed: bool;
+   createdAt: Timestamp;
+   date: text;
+   eventType: CalendarEventType;
+   id: CalendarEventId;
+   notes: opt text;
+   recurring: RecurringPattern;
+   recurringEndDate: opt text;
+   time: opt text;
+   title: text;
+   userId: UserId;
+ };
+type BulkBuyStatus = 
+ variant {
+   cancelled;
+   fulfilled;
+   open;
+ };
+type BulkBuyResponse = 
+ record {
+   note: text;
+   quantity: float64;
+   respondedAt: Timestamp;
+   responderId: UserId;
+ };
+type BulkBuyRequest = 
+ record {
+   createdAt: Timestamp;
+   groupId: GroupId;
+   id: BulkBuyId;
+   itemName: text;
+   quantity: float64;
+   requesterId: UserId;
+   responses: vec BulkBuyResponse;
+   status: BulkBuyStatus;
+   targetDate: Timestamp;
+   unit: text;
+ };
+type BulkBuyId = nat;
+type BoundaryType = 
+ variant {
+   farm_field;
+   grazing_zone;
+   orchard;
+   other;
+ };
+type BookingPublic = 
+ record {
+   clientId: UserId;
+   createdAt: Timestamp;
+   id: nat;
+   location: Location;
+   notes: text;
+   providerId: UserId;
+   scheduledAt: Timestamp;
+   serviceId: nat;
+   status: variant {
+             cancelled;
+             completed;
+             confirmed;
+             in_progress;
+             pending;
+           };
+   totalPrice: float64;
+ };
+type BidId = nat;
+type BITrend = 
+ variant {
+   down;
+   flat;
+   up;
+ };
+type BIReportType = 
+ variant {
+   crop_profitability;
+   livestock_profitability;
+   market_opportunity;
+   profit_forecast;
+ };
+type BIReportId = nat;
+type BIReport = 
+ record {
+   generatedAt: Timestamp;
+   id: BIReportId;
+   insights: vec BIInsight;
+   period: BIPeriod;
+   reportType: BIReportType;
+   userId: UserId;
+ };
+type BIPeriod = 
+ variant {
+   monthly;
+   quarterly;
+   weekly;
+ };
+type BIInsight = 
+ record {
+   descriptionEn: text;
+   descriptionSw: text;
+   recommendationEn: text;
+   recommendationSw: text;
+   titleEn: text;
+   titleSw: text;
+   trend: BITrend;
+   unit: text;
+   value: float64;
+ };
+type AuctionStatus = 
+ variant {
+   active;
+   cancelled;
+   completed;
+   ended;
+ };
+type AuctionResult = 
+ record {
+   auctionId: AuctionId;
+   completedAt: opt Timestamp;
+   finalPrice: nat;
+   sellerAccepted: opt bool;
+   winnerId: opt UserId;
+ };
+type AuctionListingType = 
+ variant {
+   crop;
+   livestock;
+ };
+type AuctionListing = 
+ record {
+   bidCount: nat;
+   currentBid: nat;
+   currentBidderId: opt UserId;
+   description: text;
+   endTime: Timestamp;
+   id: AuctionId;
+   images: vec text;
+   isAnonymousBidding: bool;
+   listingType: AuctionListingType;
+   quantity: nat;
+   region: text;
+   sellerId: UserId;
+   startTime: Timestamp;
+   startingPrice: nat;
+   status: AuctionStatus;
+   title: text;
+   unit: text;
+ };
+type AuctionId = nat;
+type AuctionBid = 
+ record {
+   auctionId: AuctionId;
+   bidAmount: nat;
+   bidderId: UserId;
+   id: BidId;
+   isWinning: bool;
+   placedAt: Timestamp;
+ };
+type ApplicationStatus = 
+ variant {
+   accepted;
+   declined;
+   pending;
+ };
+type AppStatus = 
+ variant {
+   approved;
+   pending;
+   rejected;
+ };
+type AnnouncementType = 
+ variant {
+   emergency;
+   opportunity;
+   policy_update;
+   subsidy;
+   training;
+ };
+type AnnouncementId = nat;
+type AnimalRecordPublic = 
+ record {
+   animalType: text;
+   breed: opt text;
+   count: nat;
+   createdAt: Timestamp;
+   healthStatus: variant {
+                   deceased;
+                   healthy;
+                   sick;
+                   under_treatment;
+                 };
+   id: nat;
+   keeperId: UserId;
+   notes: text;
+ };
+type AnimalListingPublic = 
+ record {
+   animalType: text;
+   breed: opt text;
+   count: nat;
+   createdAt: Timestamp;
+   description: text;
+   id: ListingId;
+   imageUrl: opt text;
+   inquiryCount: nat;
+   isAvailable: bool;
+   keeperId: UserId;
+   location: Location;
+   pricePerHead: float64;
+   updatedAt: Timestamp;
+ };
+type AnimalAnalytics = 
+ record {
+   animalType: text;
+   count: nat;
+   revenue: float64;
+ };
+type AnalyticsPeriod = 
+ variant {
+   month;
+   quarter;
+   year;
+ };
+type AnalysisType = 
+ variant {
+   crop_health;
+   disease_spread;
+   grazing_conditions;
+   irrigation_coverage;
+ };
+type AnalysisStatus = 
+ variant {
+   complete;
+   failed;
+   pending;
+ };
+type AnalysisId = nat;
+type AlertId = nat;
+type AiInsight = 
+ record {
+   category: text;
+   finding: text;
+   recommendation: text;
+   severity: InsightSeverity;
+ };
+service : {
+  acceptDigitalContract: (id: ContractId) -> (bool);
+  addAnimal: (animalType: text, breed: opt text, count: nat) ->
+   (AnimalRecordPublic);
+  addAnimalListing: (animalType: text, breed: opt text, count: nat,
+   pricePerHead: float64, description: text, imageUrl: opt text, location:
+   Location) -> (AnimalListingPublic);
+  addCropListing: (cropType: text, quantityKg: float64, pricePerKg: float64,
+   description: text, imageUrl: opt text, location: Location) ->
+   (CropListingPublic);
+  addDigitalRecord: (recordType: RecordType, date: Timestamp, title: 
+   text, description: text, amount: opt float64, unit: opt text, category:
+   opt text, linkedId: opt nat) -> (DigitalRecord);
+  addImprovementSuggestion: (suggestionText: text, category: text) ->
+   (InsightSuggestionId);
+  addInputProduct: (name: text, category:
+   variant {
+     equipment;
+     feed;
+     fertilizer;
+     other;
+     pesticide;
+     seeds;
+   }, description: text, pricePerUnit: float64, unit: text, stockQuantity:
+   float64, imageUrl: opt text) -> (InputProductPublic);
+  addInventoryItem: (name: text, category: InventoryCategory, quantity:
+   float64, unit: text, reorderLevel: float64, supplierContact: opt text) ->
+   (InventoryItem);
+  addMarketPrice: (commodity: text, commodityType:
+   variant {
+     animal;
+     crop;
+     input;
+   }, pricePerUnit: float64, unit: text, market: text, region: text) ->
+   (MarketPricePublic);
+  addMarketRecommendation: (commodity: text, recommendation: text, action:
+   variant {
+     buy;
+     hold;
+     sell;
+     wait;
+   }, targetPrice: opt float64, targetDate: opt Timestamp, reasoning:
+   text) -> (MarketRecommendation);
+  addServiceListing: (serviceType: text, description: text, priceMin:
+   float64, priceMax: float64, coverageAreas: vec text, equipment:
+   vec text) -> (ServiceListingPublic);
+  addSoilReport: (farmId: nat, phLevel: float64, nitrogen: float64,
+   phosphorus: float64, potassium: float64, texture: text, suitableCrops:
+   vec text) -> (SoilReport);
+  addSpecialistDiagnosisAttachment: (diagnosisId: text, photoUrls: vec text,
+   notes: text) -> (SpecialistDiagnosisAttachment);
+  addSpecialistNote: (id: TraceabilityId, note: text, photoUrls: vec text) ->
+   (bool);
+  addSpecialistProductNote: (id: TraceabilityId, note: text, photoUrls:
+   vec text) -> (bool);
+  addSustainabilityContent: (contentType: ContentType, title: text, bodyEn:
+   text, bodySw: text, category: ContentCategory) -> (SustainabilityContent);
+  addTraceabilityEvent: (id: TraceabilityId, eventType: text, description:
+   text) -> (bool);
+  addTransportListing: (vehicleType: text, capacityTons: float64, pricePerKm:
+   float64, coverageAreas: vec text) -> (TransportListingPublic);
+  addTreatmentRecord: (animalId: nat, diagnosis: text, treatment: text,
+   medication: vec text, notes: text) -> (TreatmentRecordPublic);
+  addVaccinationRecord: (animalId: nat, keeperId: UserId, vaccineName: 
+   text, nextDueAt: opt Timestamp, notes: text) -> (VaccinationRecord);
+  applyForLoan: (amount: float64, purpose: text, durationMonths: nat,
+   repaymentTerms: text) -> (LoanApplication);
+  applyToJob: (jobId: JobId, coverNote: text) -> (JobApplicationId);
+  cancelAuction: (auctionId: AuctionId) -> (bool);
+  changePassword: (oldPasswordHash: text, newPasswordHash: text) -> (bool);
+  closeAuction: (auctionId: AuctionId) ->
+   (variant {
+      err: text;
+      ok: AuctionResult;
+    });
+  confirmDelivery: (paymentId: PaymentId) -> (bool);
+  confirmPayment: (paymentId: PaymentId) -> (bool);
+  createAuction: (listingType: AuctionListingType, title: text, description:
+   text, startingPrice: nat, endTime: Timestamp, quantity: nat, unit: 
+   text, images: vec text, region: text, isAnonymousBidding: bool) ->
+   (AuctionListing);
+  createBulkBuyRequest: (groupId: GroupId, itemName: text, quantity: 
+   float64, unit: text, targetDate: Timestamp) -> (BulkBuyRequest);
+  createCalendarEvent: (eventType: CalendarEventType, title: text, date:
+   text, time: opt text, notes: opt text, recurring: RecurringPattern,
+   recurringEndDate: opt text) -> (CalendarEvent);
+  createDigitalContract: (counterpartyId: UserId, templateType:
+   ContractTemplateType, title: text, partiesNames: text, terms: text,
+   amount: float64, currency: text, startDate: Timestamp, endDate:
+   Timestamp) -> (DigitalContract);
+  createFarm: (name: text, location: Location, sizeHectares: float64,
+   cropTypes: vec text) -> (FarmRecord);
+  createFarmingGroup: (name: text, description: text) -> (FarmingGroup);
+  createGroupListing: (groupId: GroupId, listingIds: vec ListingId, title:
+   text, description: text) -> (GroupListing);
+  createJobListing: (title: text, description: text, jobType: JobType,
+   payRate: text, location: text, deadline: int, requiredSkills: vec text) ->
+   (JobId);
+  createListing: (listingType: ListingType, title: text, description: 
+   text, price: float64, quantity: opt float64, unit: opt text, location:
+   Location, imageUrls: vec text, tags: vec text) -> (ListingPublic);
+  createProductTraceability: (listingId: ListingId, farmName: text, location:
+   Location) -> (ProductTraceability);
+  createTopic: (categoryId: CategoryId, title: text, body: text, tags:
+   vec text, language: Language) -> (variant {
+                                       err: text;
+                                       ok: text;
+                                     });
+  createTransportBooking: (providerId: UserId, distanceKm: float64,
+   ratePerKm: float64, selectedTimeSlot: text, pickupAddress: text,
+   deliveryAddress: text) -> (TransportBooking);
+  createWorkerProfile: (name: text, skills: vec text, serviceArea: text,
+   availability: text, bio: text) -> (WorkerProfileId);
+  deactivateAnnouncement: (id: AnnouncementId) -> (bool);
+  deactivateListing: (id: ListingId) -> (bool);
+  deactivateOutbreak: (id: OutbreakId) -> (bool);
+  deleteCalendarEvent: (id: CalendarEventId) -> (bool);
+  deleteDigitalRecord: (id: RecordId) -> (bool);
+  deleteFarmBoundary: (id: FarmBoundaryId) -> (bool);
+  deleteForecast: (id: ForecastId) -> (bool);
+  deleteInputProduct: (id: nat) -> (bool);
+  deleteServiceListing: (id: nat) -> (bool);
+  deleteSustainabilityPractice: (id: SustainabilityRecordId) -> (bool);
+  fileInsuranceClaim: (applicationId: InsuranceAppId, claimType: ClaimType,
+   damageDescription: text, estimatedLoss: nat, evidenceNotes: text) ->
+   (ClaimId);
+  generateBIReport: (reportType: BIReportType, period: BIPeriod) ->
+   (BIReport);
+  generateFarmAnalytics: (period: AnalyticsPeriod) -> (FarmAnalyticsSnapshot);
+  generateForecast: (forecastType: ForecastType, title: text,
+   cropOrAnimalType: text, region: text) -> (ForecastRecord);
+  generateIrrigationRecommendation: (cropType: text, region: text) ->
+   (IrrigationRecommendation);
+  getAnalysesByFarm: (farmId: nat) -> (vec DroneAnalysis) query;
+  getAnalysisById: (id: AnalysisId) -> (opt DroneAnalysis) query;
+  getAnimalDiagnosisById: (diagnosisId: DiagnosisId) ->
+   (opt record {
+          DiagnosisRequest;
+          opt DiagnosisResultPublic;
+        }) query;
+  getAnimalListings: (keeperId: opt UserId) ->
+   (vec AnimalListingPublic) query;
+  getAnnouncement: (id: AnnouncementId) -> (opt GovtNGOAnnouncement) query;
+  getAuction: (id: AuctionId) -> (opt AuctionListing) query;
+  getAuctionResult: (auctionId: AuctionId) -> (opt AuctionResult) query;
+  getAuctions: (status: opt AuctionStatus, listingType:
+   opt AuctionListingType, region: opt text) -> (vec AuctionListing) query;
+  getBIReport: (id: BIReportId) -> (opt BIReport) query;
+  getBidsForAuction: (auctionId: AuctionId) -> (vec AuctionBid) query;
+  getCalendarEvents: () -> (vec CalendarEvent) query;
+  getCategories: () -> (vec ForumCategoryPublic) query;
+  getCropListings: (farmerId: opt UserId) -> (vec CropListingPublic) query;
+  getDiagnosisById: (diagnosisId: DiagnosisId) ->
+   (opt record {
+          DiagnosisRequest;
+          opt DiagnosisResultPublic;
+        }) query;
+  getDigitalContract: (id: ContractId) -> (opt DigitalContract) query;
+  getDigitalRecord: (id: RecordId) -> (opt DigitalRecord) query;
+  getEmergencyContacts: (region: text) -> (vec EmergencyContact) query;
+  getFarmBoundariesForUser: (userId: UserId) -> (vec FarmBoundary) query;
+  getFarmBoundary: (id: FarmBoundaryId) -> (opt FarmBoundary) query;
+  getForecast: (id: ForecastId) -> (opt ForecastRecord) query;
+  getForecasts: (filter: ForecastFilter) -> (vec ForecastRecord) query;
+  getForumReplyWithUpvotes: (replyId: nat) ->
+   (opt ForumReplyWithUpvotes) query;
+  getGroup: (id: GroupId) -> (opt FarmingGroup) query;
+  getInputProducts: (sellerId: opt UserId) -> (vec InputProductPublic) query;
+  getInsuranceApplication: (appId: InsuranceAppId) ->
+   (opt InsuranceApplication) query;
+  getInsuranceClaim: (claimId: ClaimId) -> (opt InsuranceClaim) query;
+  getInventoryHistory: (itemId: InventoryItemId) ->
+   (vec InventoryHistory) query;
+  getIrrigationRecommendation: (id: IrrigationId) ->
+   (opt IrrigationRecommendation) query;
+  getJob: (jobId: JobId) -> (opt JobListing) query;
+  getLatestFarmAnalytics: () -> (opt FarmAnalyticsSnapshot) query;
+  getLatestPrices: (commodity: opt text, region: opt text) ->
+   (vec MarketPricePublic) query;
+  getLeaderboard: (region: text, roleFilter: opt text) ->
+   (vec UserReputation) query;
+  getListingById: (id: ListingId) -> (opt ListingPublic) query;
+  getListings: (listingType: opt ListingType, region: opt text, searchTerm:
+   opt text, priceMin: opt float64, priceMax: opt float64) ->
+   (vec ListingPublic) query;
+  getLoanActivitySummary: () -> (LoanActivitySummary) query;
+  getLoanApplication: (id: LoanId) -> (opt LoanApplication) query;
+  getLowStockItems: () -> (vec InventoryItem) query;
+  getMarketGaps: (limit: nat) -> (vec MarketGap) query;
+  getMarketRecommendations: (commodity: opt text) ->
+   (vec MarketRecommendation) query;
+  getMessages: (conversationId: ConversationId) -> (vec MessagePublic) query;
+  getMyAnalyses: () -> (vec DroneAnalysis) query;
+  getMyAnimalListings: () -> (vec AnimalListingPublic) query;
+  getMyAnimals: () -> (vec AnimalRecordPublic) query;
+  getMyAuctions: () -> (vec AuctionListing) query;
+  getMyBookings: () -> (vec BookingPublic) query;
+  getMyCarbonCertifications: () -> (vec CarbonCertification) query;
+  getMyCarbonPoints: () -> (nat) query;
+  getMyConversations: () -> (vec ConversationPublic) query;
+  getMyCropListings: () -> (vec CropListingPublic) query;
+  getMyDiagnoses: () ->
+   (vec record {
+          DiagnosisRequest;
+          opt DiagnosisResultPublic;
+        }) query;
+  getMyFarmBenchmark: (region: text) -> (FarmBenchmark) query;
+  getMyFarms: () -> (vec FarmRecord) query;
+  getMyForecasts: () -> (vec ForecastRecord) query;
+  getMyImprovementSuggestions: () -> (vec ImprovementSuggestion) query;
+  getMyInputProducts: () -> (vec InputProductPublic) query;
+  getMyIrrigationLogs: () -> (vec IrrigationLog) query;
+  getMyIrrigationRecommendations: () -> (vec IrrigationRecommendation) query;
+  getMyListings: () -> (vec ListingPublic) query;
+  getMyNotifications: (unreadOnly: bool) -> (vec NotificationPublic) query;
+  getMyOrders: () -> (vec OrderPublic) query;
+  getMyOutbreakAlerts: () -> (vec OutbreakAlert) query;
+  getMyProfile: () -> (opt UserProfilePublic) query;
+  getMySales: () -> (vec OrderPublic) query;
+  getMyServiceListings: () -> (vec ServiceListingPublic) query;
+  getMyServiceRequests: () -> (vec BookingPublic) query;
+  getMyTransactions: () -> (vec PaymentPublic) query;
+  getMyTransportBookings: () -> (vec TransportBooking) query;
+  getMyWorkerProfile: () -> (opt WorkerProfile) query;
+  getOutbreak: (id: OutbreakId) -> (opt OutbreakRecord) query;
+  getOutbreaks: (filter: OutbreakFilter) -> (vec OutbreakRecord) query;
+  getPaymentById: (paymentId: PaymentId) -> (opt PaymentPublic) query;
+  getPriceTrend: (commodity: text, region: text) -> (PriceTrend) query;
+  getProductTraceability: (listingId: ListingId) ->
+   (opt ProductTraceability) query;
+  getRecentTopics: (limit: nat) -> (vec ForumTopicSummary) query;
+  getRepliesByTopic: (topicId: TopicId) -> (vec ForumReplyPublic) query;
+  getReplyUpvoteCount: (replyId: nat) -> (nat) query;
+  getServiceListings: (area: opt text) -> (vec ServiceListingPublic) query;
+  getSoilReports: (farmId: nat) -> (vec SoilReport) query;
+  getSpecialistAttachments: (diagnosisId: text) ->
+   (vec SpecialistDiagnosisAttachment) query;
+  getTopContributorOfWeek: () -> (opt UserReputation) query;
+  getTopSellersByRegion: (region: text, limit: nat) -> (vec TopSeller) query;
+  getTopicById: (topicId: TopicId) -> (opt ForumTopicPublic);
+  getTopicsByCategory: (categoryId: CategoryId) ->
+   (vec ForumTopicSummary) query;
+  getTraceabilityByQrCode: (qrCodeId: QrCodeId) ->
+   (opt ProductTraceability) query;
+  getTransportListings: (area: opt text) ->
+   (vec TransportListingPublic) query;
+  getTransportTimeSlots: (providerId: UserId) ->
+   (opt TransportTimeSlot) query;
+  getTreatmentHistory: (animalId: nat) -> (vec TreatmentRecordPublic) query;
+  getTrendingCrops: (limit: nat) -> (vec TrendingCrop) query;
+  getUnreadMessageCount: () -> (nat) query;
+  getUnreadNotificationCount: () -> (nat) query;
+  getUserCarbonCertifications: (userId: principal) ->
+   (vec CarbonCertification) query;
+  getUserCarbonPoints: (userId: principal) -> (nat) query;
+  getUserProfile: (userId: UserId) -> (opt UserProfilePublic) query;
+  getUserRating: (userId: UserId) -> (float64) query;
+  getUserRatings: (userId: UserId) -> (vec RatingRecord) query;
+  getUserReputation: (userId: principal) -> (opt UserReputation) query;
+  getVaccinationHistory: (animalId: nat) -> (vec VaccinationRecord) query;
+  getWeather: (location: Location) -> (WeatherData) query;
+  getWeeklyLeaderboard: (region: text) -> (vec WeeklyLeaderboardEntry) query;
+  hasUserUpvotedReply: (replyId: nat) -> (bool) query;
+  incrementAnimalInquiry: (listingId: ListingId) -> (bool);
+  incrementCropInquiry: (listingId: ListingId) -> (bool);
+  incrementInputInquiry: (id: nat) -> (bool);
+  incrementListingInquiry: (id: ListingId) -> (bool);
+  incrementServiceInquiry: (id: nat) -> (bool);
+  initiateEscrowPayment: (payeeId: UserId, orderId: opt OrderId, amount:
+   float64, method: PaymentMethod, escrowNote: opt text) -> (PaymentPublic);
+  initiatePayment: (payeeId: UserId, orderId: opt OrderId, amount: float64,
+   method: PaymentMethod) -> (PaymentPublic);
+  joinFarmingGroup: (inviteCode: text) -> (bool);
+  leaveFarmingGroup: (groupId: GroupId) -> (bool);
+  listAnnouncements: (region: opt text) -> (vec GovtNGOAnnouncement) query;
+  listAnnouncementsByType: (region: opt text, announcementType:
+   AnnouncementType) -> (vec GovtNGOAnnouncement) query;
+  listApplicationsForJob: (jobId: JobId) -> (vec JobApplication) query;
+  listBulkBuyRequests: (groupId: GroupId) -> (vec BulkBuyRequest) query;
+  listDigitalRecords: () -> (vec DigitalRecord) query;
+  listDigitalRecordsByType: (recordType: RecordType) ->
+   (vec DigitalRecord) query;
+  listDigitalRecordsByUserId: (userId: UserId) -> (vec DigitalRecord) query;
+  listFarmAnalytics: () -> (vec FarmAnalyticsSnapshot) query;
+  listFarmBoundaries: () -> (vec FarmBoundary) query;
+  listGroupListings: (groupId: GroupId) -> (vec GroupListing) query;
+  listGroupMembers: (groupId: GroupId) -> (vec GroupMembership) query;
+  listInventoryItems: () -> (vec InventoryItem) query;
+  listJobs: (jobType: opt JobType, location: opt text, status:
+   opt JobStatus) -> (vec JobListing) query;
+  listMyBIReports: () -> (vec BIReport) query;
+  listMyCarbonPractices: () -> (vec CarbonPractice) query;
+  listMyContracts: () -> (vec DigitalContract) query;
+  listMyGroups: () -> (vec FarmingGroup) query;
+  listMyInsuranceApplications: (status: opt AppStatus) ->
+   (vec InsuranceApplication) query;
+  listMyInsuranceClaims: (status: opt ClaimStatus) ->
+   (vec InsuranceClaim) query;
+  listMyJobApplications: () -> (vec JobApplication) query;
+  listMyLoanApplications: () -> (vec LoanApplication) query;
+  listMySustainabilityPractices: () -> (vec SustainabilityRecord) query;
+  listSpecialists: (roleFilter: opt UserRole, searchQuery: opt text,
+   location: opt Location) -> (vec UserProfilePublic) query;
+  listSustainabilityContent: (category: opt ContentCategory) ->
+   (vec SustainabilityContent) query;
+  listWorkerProfiles: (skill: opt text, serviceArea: opt text) ->
+   (vec WorkerProfile) query;
+  logCarbonPractice: (practiceType: PracticeType__1, description: text,
+   dateLogged: int, carbonImpactKg: nat) -> (CarbonPracticeId);
+  logIrrigation: (recommendationId: IrrigationId, followedOn: Timestamp,
+   actualWaterUseLiters: opt nat, notes: opt text) -> (IrrigationLog);
+  logSustainabilityPractice: (practiceType: PracticeType, description: 
+   text, dateImplemented: Timestamp, impactScore: opt float64) ->
+   (SustainabilityRecord);
+  login: (identifier: text, passwordHash: text) -> (opt UserProfilePublic);
+  markAllNotificationsRead: () -> (nat);
+  markMessagesRead: (conversationId: ConversationId) -> (nat);
+  markNotificationRead: (notificationId: NotificationId) -> (bool);
+  markTopicResolved: (topicId: TopicId) -> (variant {
+                                              err: text;
+                                              ok: text;
+                                            });
+  pauseAnimalListing: (listingId: ListingId) -> (bool);
+  pauseCropListing: (listingId: ListingId) -> (bool);
+  pauseInputProduct: (id: nat) -> (bool);
+  pauseListing: (id: ListingId) -> (bool);
+  pauseServiceListing: (id: nat) -> (bool);
+  pauseTransportListing: (id: nat) -> (bool);
+  placeBid: (auctionId: AuctionId, bidAmount: nat) ->
+   (variant {
+      err: text;
+      ok: AuctionBid;
+    });
+  placeOrder: (listingId: ListingId, sellerId: UserId, quantity: float64,
+   totalPrice: float64, deliveryAddress: Location, notes: text) ->
+   (OrderPublic);
+  publishAnnouncement: (authorName: text, authorOrganization: text,
+   announcementType: AnnouncementType, titleEn: text, titleSw: text, bodyEn:
+   text, bodySw: text, region: text, startDate: Timestamp, endDate:
+   opt Timestamp, contactInfo: opt text, attachmentUrl: opt text) ->
+   (GovtNGOAnnouncement);
+  rateUser: (userId: UserId, rating: nat, comment: opt text) -> (bool);
+  registerUser: (name: text, email: text, phone: text, nationalId: opt text,
+   role: UserRole, location: Location, passwordHash: text) ->
+   (UserProfilePublic);
+  removeAnimalListing: (listingId: ListingId) -> (bool);
+  removeCropListing: (listingId: ListingId) -> (bool);
+  removeGroupMember: (groupId: GroupId, userId: UserId) -> (bool);
+  removeInventoryItem: (id: InventoryItemId) -> (bool);
+  replyToTopic: (topicId: TopicId, body: text) ->
+   (variant {
+      err: text;
+      ok: text;
+    });
+  reportOutbreak: (region: text, district: opt text, outbreakType:
+   OutbreakType, diseaseName: text, severity: OutbreakSeverity, description:
+   text, affectedArea: opt text, coordinates:
+   opt record {
+         lat: float64;
+         lng: float64;
+       }) -> (OutbreakRecord);
+  requestBooking: (providerId: UserId, serviceId: nat, scheduledAt:
+   Timestamp, location: Location, totalPrice: float64, notes: text) ->
+   (BookingPublic);
+  requestOtp: (identifier: text) -> (text);
+  respondToBulkBuy: (requestId: BulkBuyId, quantity: float64, note: text) ->
+   (bool);
+  respondToJobApplication: (applicationId: JobApplicationId, accept: 
+   bool) -> (bool);
+  resumeAnimalListing: (listingId: ListingId) -> (bool);
+  resumeCropListing: (listingId: ListingId) -> (bool);
+  resumeInputProduct: (id: nat) -> (bool);
+  resumeListing: (id: ListingId) -> (bool);
+  resumeServiceListing: (id: nat) -> (bool);
+  resumeTransportListing: (id: nat) -> (bool);
+  reviewAnimalDiagnosis: (diagnosisId: DiagnosisId, newStatus:
+   variant {
+     confirmed;
+     rejected;
+   }, notes: opt text) -> (opt DiagnosisResultPublic);
+  reviewCropDiagnosis: (diagnosisId: DiagnosisId, newStatus:
+   variant {
+     confirmed;
+     rejected;
+   }, notes: opt text) -> (opt DiagnosisResultPublic);
+  saveFarmBoundary: (name: text, boundaryType: BoundaryType, coordinates:
+   vec Coordinate, areaHectares: opt float64, areaLabel: opt text, color:
+   opt text) -> (FarmBoundary);
+  sendMessage: (conversationId: ConversationId, content: text, imageUrl:
+   opt text) -> (MessagePublic);
+  sendOutbreakAlert: (outbreakId: OutbreakId, recipientId: UserId, message:
+   text) -> (OutbreakAlert);
+  setIrrigationReminder: (id: IrrigationId) -> (bool);
+  setTransportTimeSlots: (slots: vec text, availabilityStatus:
+   TransportAvailabilityStatus) -> ();
+  setupFarmerProfile: (farmSize: float64, cropTypes: vec text, soilType:
+   opt text) -> (bool);
+  setupLivestockProfile: (animalTypes: vec text, totalHeadCount: nat) ->
+   (bool);
+  signDigitalContract: (id: ContractId) -> (bool);
+  startConversation: (recipientId: UserId, subject: opt text, firstMessage:
+   text) -> (ConversationPublic);
+  submitAnimalDiagnosis: (description: text, imageData: opt text, symptoms:
+   vec text, animalType: opt text, animalId: opt nat) ->
+   (DiagnosisResultPublic);
+  submitCropDiagnosis: (description: text, imageData: opt text, symptoms:
+   vec text, cropType: opt text, location: opt Location) ->
+   (DiagnosisResultPublic);
+  submitImageAnalysis: (farmId: opt nat, imageUrl: text, imageType:
+   ImageType, analysisType: AnalysisType) -> (DroneAnalysis);
+  submitInsuranceApplication: (coverageType: CoverageType, description: 
+   text, estimatedValue: nat, supportingNotes: text) -> (InsuranceAppId);
+  submitJobRating: (jobId: JobId, ratee: principal, stars: nat, comment:
+   text) -> (bool);
+  submitSoilAnalysis: (description: text, imageData: opt text) ->
+   (DiagnosisResultPublic);
+  updateAnimalHealth: (animalId: nat, healthStatus:
+   variant {
+     deceased;
+     healthy;
+     sick;
+     under_treatment;
+   }, notes: text) -> (bool);
+  updateAnimalListing: (listingId: ListingId, count: opt nat, pricePerHead:
+   opt float64, description: opt text, imageUrl: opt text) ->
+   (opt AnimalListingPublic);
+  updateBookingStatus: (bookingId: nat, newStatus:
+   variant {
+     cancelled;
+     completed;
+     confirmed;
+     in_progress;
+     pending;
+   }) -> (bool);
+  updateCalendarEvent: (id: CalendarEventId, eventType:
+   opt CalendarEventType, title: opt text, date: opt text, time: opt text,
+   notes: opt text, recurring: opt RecurringPattern, recurringEndDate:
+   opt text, completed: opt bool) -> (bool);
+  updateContractStatus: (id: ContractId, status: ContractStatus) -> (bool);
+  updateCropListing: (listingId: ListingId, quantityKg: opt float64,
+   pricePerKg: opt float64, description: opt text, imageUrl: opt text) ->
+   (opt CropListingPublic);
+  updateDigitalRecord: (id: RecordId, title: text, description: text, amount:
+   opt float64) -> (bool);
+  updateFarmBoundary: (id: FarmBoundaryId, name: text, coordinates:
+   vec Coordinate, areaHectares: opt float64, areaLabel: opt text, color:
+   opt text) -> (bool);
+  updateInputProduct: (id: nat, name: opt text, description: opt text,
+   pricePerUnit: opt float64, stockQuantity: opt float64, imageUrl:
+   opt text) -> (opt InputProductPublic);
+  updateInsuranceApplicationStatus: (appId: InsuranceAppId, status:
+   AppStatus) -> (bool);
+  updateInsuranceClaimStatus: (claimId: ClaimId, status: ClaimStatus) ->
+   (bool);
+  updateInventoryItem: (id: InventoryItemId, quantity: float64, changeType:
+   InventoryChangeType, note: text) -> (bool);
+  updateJobStatus: (jobId: JobId, status: JobStatus) -> (bool);
+  updateListing: (id: ListingId, title: opt text, description: opt text,
+   price: opt float64, quantity: opt float64, imageUrls: opt vec text) ->
+   (opt ListingPublic);
+  updateLoanStatus: (id: LoanId, status: LoanStatus, notes: opt text) ->
+   (bool);
+  updateMarketPrice: (priceId: nat, newPrice: float64) -> (bool);
+  updateMyProfile: (name: opt text, location: opt Location, language:
+   opt Language, profilePictureData: opt text) -> (bool);
+  updateOrderStatus: (orderId: OrderId, newStatus: OrderStatus) -> (bool);
+  updateServiceListing: (id: nat, description: opt text, priceMin:
+   opt float64, priceMax: opt float64, coverageAreas: opt vec text,
+   equipment: opt vec text) -> (opt ServiceListingPublic);
+  upvoteReply: (replyId: nat) -> (bool);
+  verifyOtp: (identifier: text, otp: text) -> (bool);
+}

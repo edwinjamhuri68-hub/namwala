@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Lora";
+    --font-body: "DM Sans";
+    --font-mono: monospace;
+    --radius: 0.625rem;
+
+    --background: 0.96 0.015 75;
+    --foreground: 0.2 0.03 50;
+    --card: 0.98 0.01 75;
+    --card-foreground: 0.2 0.03 50;
+    --popover: 0.98 0.01 75;
+    --popover-foreground: 0.2 0.03 50;
+
+    --primary: 0.45 0.12 30;
+    --primary-foreground: 0.96 0.01 30;
+
+    --secondary: 0.92 0.02 75;
+    --secondary-foreground: 0.3 0.03 50;
+    --muted: 0.92 0.02 75;
+    --muted-foreground: 0.5 0.02 50;
+
+    --accent: 0.5 0.1 160;
+    --accent-foreground: 0.96 0.01 160;
+
+    --destructive: 0.5 0.2 25;
+    --destructive-foreground: 0.96 0.01 25;
+
+    --border: 0.88 0.025 75;
+    --input: 0.88 0.025 75;
+    --ring: 0.45 0.12 30;
+
+    --chart-1: 0.45 0.12 30;
+    --chart-2: 0.5 0.1 160;
+    --chart-3: 0.62 0.15 85;
+    --chart-4: 0.58 0.14 25;
+    --chart-5: 0.55 0.15 150;
+
+    --success: 0.65 0.12 95;
+    --success-foreground: 0.96 0.01 95;
+    --warning: 0.75 0.14 65;
+    --warning-foreground: 0.2 0.03 50;
+    --info: 0.6 0.15 230;
+    --info-foreground: 0.96 0.01 230;
+
+    --sidebar: 0.96 0.015 75;
+    --sidebar-foreground: 0.2 0.03 50;
+    --sidebar-primary: 0.45 0.12 30;
+    --sidebar-primary-foreground: 0.96 0.01 30;
+    --sidebar-accent: 0.5 0.1 160;
+    --sidebar-accent-foreground: 0.2 0.03 50;
+    --sidebar-border: 0.88 0.025 75;
+    --sidebar-ring: 0.45 0.12 30;
+  }
+
+  .dark {
+    --background: 0.14 0.015 50;
+    --foreground: 0.92 0.01 60;
+    --card: 0.18 0.018 50;
+    --card-foreground: 0.92 0.01 60;
+    --popover: 0.18 0.018 50;
+    --popover-foreground: 0.92 0.01 60;
+
+    --primary: 0.72 0.17 70;
+    --primary-foreground: 0.14 0.015 70;
+
+    --secondary: 0.22 0.02 50;
+    --secondary-foreground: 0.82 0.01 60;
+    --muted: 0.22 0.02 50;
+    --muted-foreground: 0.52 0.012 55;
+
+    --accent: 0.58 0.14 160;
+    --accent-foreground: 0.95 0.005 160;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.92 0.01 25;
+
+    --border: 0.28 0.02 50;
+    --input: 0.28 0.02 50;
+    --ring: 0.72 0.17 70;
+
+    --chart-1: 0.72 0.17 70;
+    --chart-2: 0.58 0.14 160;
+    --chart-3: 0.65 0.15 85;
+    --chart-4: 0.62 0.18 25;
+    --chart-5: 0.6 0.16 150;
+
+    --success: 0.68 0.13 95;
+    --success-foreground: 0.92 0.01 95;
+    --warning: 0.72 0.16 65;
+    --warning-foreground: 0.92 0.01 65;
+    --info: 0.65 0.17 230;
+    --info-foreground: 0.95 0.005 230;
+
+    --sidebar: 0.18 0.018 50;
+    --sidebar-foreground: 0.92 0.01 60;
+    --sidebar-primary: 0.72 0.17 70;
+    --sidebar-primary-foreground: 0.14 0.015 70;
+    --sidebar-accent: 0.58 0.14 160;
+    --sidebar-accent-foreground: 0.95 0.005 160;
+    --sidebar-border: 0.28 0.02 50;
+    --sidebar-ring: 0.72 0.17 70;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  @font-face {
+    font-family: "Lora";
+    src: url("/assets/fonts/Lora.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/DMSans.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-in {
+    animation: fade-in 0.4s ease-in-out;
+  }
+
+  .slide-up {
+    animation: slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.15);
+  }
+
+  .shadow-subtle {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+  }
+
+  .event-chip-planting {
+    @apply bg-primary/20 text-primary border border-primary/30 rounded-full px-2 py-1 text-xs font-medium;
+  }
+
+  .event-chip-health {
+    @apply bg-accent/20 text-accent border border-accent/30 rounded-full px-2 py-1 text-xs font-medium;
+  }
+
+  .event-chip-irrigation {
+    @apply bg-info/20 text-info border border-info/30 rounded-full px-2 py-1 text-xs font-medium;
+  }
+
+  .event-chip-maintenance {
+    @apply bg-warning/20 text-warning border border-warning/30 rounded-full px-2 py-1 text-xs font-medium;
+  }
+}
